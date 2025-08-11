@@ -1,9 +1,11 @@
 server:
   port: 8888
+  servlet:
+    context-path: /api/v1
 
 spring:
   application:
-    name: WarehouseManagement
+    name: go_phone
   datasource:
     url: ${DB_URL}
     driverClassName: com.mysql.cj.jdbc.Driver

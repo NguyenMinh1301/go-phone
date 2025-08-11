@@ -1,4 +1,4 @@
-package WarehouseManagement;
+package go_phone;
 
 import io.github.cdimascio.dotenv.Dotenv;
 import org.springframework.boot.SpringApplication;
