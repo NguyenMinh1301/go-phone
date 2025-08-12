@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="go_phone.feature.product.mapper.ProductMapper">
+
+    <resultMap id="ProductResult" type="go_phone.feature.product.entity.Product">
+        <id property="productId"                column="product_id"/>
+        <result property="brandId"              column="brand_id"/>
+        <result property="colorId"              column="color_id"/>
+        <result property="madeFromId"           column="made_from_id"/>
+        <result property="productName"          column="product_name"/>
+        <result property="screenSize"           column="screen_size"/>
+        <result property="screenDetails"        column="screen_details"/>
+        <result property="screenResolution"     column="screen_resolution"/>
+        <result property="screenRefreshRate"    column="screen_refresh_rate"/>
+        <result property="cameraFront"          column="camera_front"/>
+        <result property="cameraFrontDetails"   column="camera_front_details"/>
+        <result property="cameraRear"           column="camera_rear"/>
+        <result property="cameraRearDetails"    column="camera_rear_details"/>
+        <result property="chipset"              column="chipset"/>
+        <result property="gpu"                  column="gpu"/>
+        <result property="nfc"                  column="nfc"/>
+        <result property="sim"                  column="sim"/>
+        <result property="audioPort"            column="audio_port"/>
+        <result property="gps"                  column="gps"/>
+        <result property="ram"                  column="ram"/>
+        <result property="storageCapacity"      column="storage_capacity"/>
+        <result property="operatingSystem"      column="operating_system"/>
+        <result property="size"                 column="size"/>
+        <result property="weight"               column="weight"/>
+        <result property="backMaterial"         column="back_material"/>
+        <result property="frameMaterial"        column="frame_material"/>
+        <result property="wifi"                 column="wifi"/>
+        <result property="bluetooth"            column="bluetooth"/>
+        <result property="note"                 column="note"/>
+        <result property="createdAt"            column="created_at"/>
+        <result property="createdBy"            column="created_by"/>
+        <result property="updatedAt"            column="updated_at"/>
+        <result property="updatedBy"            column="updated_by"/>
+        <result property="isActive"             column="is_active"/>
+        <result property="isDeleted"            column="is_deleted"/>
+    </resultMap>
+
+    <select id="findAll" resultMap="ProductResult">
+        SELECT
+        product_id
+        , brand_id
+        , color_id
+        , made_from_id
+        , product_name
+        , screen_size
+        , screen_details
+        , screen_resolution
+        , screen_refresh_rate
+        , camera_front
+        , camera_front_details
+        , camera_rear
+        , camera_rear_details
+        , chipset
+        , gpu
+        , nfc
+        , sim
+        , audio_port
+        , gps
+        , ram
+        , storage_capacity
+        , operating_system
+        , size
+        , weight
+        , back_material
+        , frame_material
+        , wifi
+        , bluetooth
+        , note
+        , created_at
+        , created_by
+        , updated_at
+        , updated_by
+        , is_active
+        , is_deleted
+        FROM product
+        WHERE is_deleted = 0
+    </select>
+
+    <select id="findById" parameterType="int" resultMap="ProductResult">
+        SELECT
+        product_id
+        , brand_id
+        , color_id
+        , made_from_id
+        , product_name
+        , screen_size
+        , screen_details
+        , screen_resolution
+        , screen_refresh_rate
+        , camera_front
+        , camera_front_details
+        , camera_rear
+        , camera_rear_details
+        , chipset
+        , gpu
+        , nfc
+        , sim
+        , audio_port
+        , gps
+        , ram
+        , storage_capacity
+        , operating_system
+        , size
+        , weight
+        , back_material
+        , frame_material
+        , wifi
+        , bluetooth
+        , note
+        , created_at
+        , created_by
+        , updated_at
+        , updated_by
+        , is_active
+        , is_deleted
+        FROM product
+        WHERE product_id = #{id}
+        AND is_deleted = 0
+    </select>
+
+    <insert id="insert" parameterType="go_phone.feature.product.entity.Product" useGeneratedKeys="true"
+            keyProperty="productId">
+        INSERT INTO product (
+        brand_id
+        , color_id
+        , made_from_id
+        , product_name
+        , screen_size
+        , screen_details
+        , screen_resolution
+        , screen_refresh_rate
+        , camera_front
+        , camera_front_details
+        , camera_rear
+        , camera_rear_details
+        , chipset
+        , gpu
+        , nfc
+        , sim
+        , audio_port
+        , gps
+        , ram
+        , storage_capacity
+        , operating_system
+        , size
+        , weight
+        , back_material
+        , frame_material
+        , wifi
+        , bluetooth
+        , note
+        , `created_by`
+        , `is_active`
+        , `is_deleted`
+        ) VALUES (
+        #{brandId}
+        , #{colorId}
+        , #{madeFromId}
+        , #{productName}
+        , #{screenSize}
+        , #{screenDetails}
+        , #{screenResolution}
+        , #{screenRefreshRate}
+        , #{cameraFront}
+        , #{cameraFrontDetails}
+        , #{cameraRear}
+        , #{cameraRearDetails}
+        , #{chipset}
+        , #{gpu}
+        , #{nfc}
+        , #{sim}
+        , #{audioPort}
+        , #{gps}
+        , #{ram}
+        , #{storageCapacity}
+        , #{operatingSystem}
+        , #{size}
+        , #{weight}
+        , #{backMaterial}
+        , #{frameMaterial}
+        , #{wifi}
+        , #{bluetooth}
+        , #{note}
+        , #{createdBy}
+        , #{isActive}
+        , #{isDeleted}
+        )
+    </insert>
+
+    <update id="update" parameterType="go_phone.feature.product.entity.Product">
+        UPDATE product
+        SET
+        brand_id =                  #{brandId}
+        , color_id =                #{colorId}
+        , made_from_id =            #{madeFromId}
+        , product_name =            #{productName}
+        , screen_size =             #{screenSize}
+        , screen_details =          #{screenDetails}
+        , screen_resolution =       #{screenResolution}
+        , screen_refresh_rate =     #{screenRefreshRate}
+        , camera_front =            #{cameraFront}
+        , camera_front_details =    #{cameraFrontDetails}
+        , camera_rear =             #{cameraRear}
+        , camera_rear_details =     #{cameraRearDetails}
+        , chipset =                 #{chipset}
+        , gpu =                     #{gpu}
+        , nfc =                     #{nfc}
+        , sim =                     #{sim}
+        , audio_port =              #{audioPort}
+        , gps =                     #{gps}
+        , ram =                     #{ram}
+        , storage_capacity =        #{storageCapacity}
+        , operating_system =        #{operatingSystem}
+        , size =                    #{size}
+        , weight =                  #{weight}
+        , back_material =           #{backMaterial}
+        , frame_material =          #{frameMaterial}
+        , wifi =                    #{wifi}
+        , bluetooth =               #{bluetooth}
+        , note =                    #{note}
+        , updated_at =              NOW()
+        , updated_by =              #{updatedBy}
+        , is_active =               #{isActive}
+        WHERE product_id =          #{productId}
+    </update>
+
+    <update id="softDeleteById" parameterType="int">
+        UPDATE product
+        SET is_deleted = 1
+        WHERE product_id = #{id}
+    </update>
+
+    <select id="findByCategoryId" parameterType="int" resultMap="ProductResult">
+        SELECT
+        product_id
+        , brand_id
+        , color_id
+        , made_from_id
+        , product_name
+        , screen_size
+        , screen_details
+        , screen_resolution
+        , screen_refresh_rate
+        , camera_front
+        , camera_front_details
+        , camera_rear
+        , camera_rear_details
+        , chipset
+        , gpu
+        , nfc
+        , sim
+        , audio_port
+        , gps
+        , ram
+        , storage_capacity
+        , operating_system
+        , size
+        , weight
+        , back_material
+        , frame_material
+        , wifi
+        , bluetooth
+        , note
+        , created_at
+        , created_by
+        , updated_at
+        , updated_by
+        , is_active
+        , is_deleted
+        FROM product
+        WHERE category_id = #{categoryId}
+        AND is_deleted = 0
+    </select>
+
+    <select id="searchByName" parameterType="string" resultMap="ProductResult">
+        SELECT
+        product_id
+        , brand_id
+        , color_id
+        , made_from_id
+        , product_name
+        , screen_size
+        , screen_details
+        , screen_resolution
+        , screen_refresh_rate
+        , camera_front
+        , camera_front_details
+        , camera_rear
+        , camera_rear_details
+        , chipset
+        , gpu
+        , nfc
+        , sim
+        , audio_port
+        , gps
+        , ram
+        , storage_capacity
+        , operating_system
+        , size
+        , weight
+        , back_material
+        , frame_material
+        , wifi
+        , bluetooth
+        , note
+        , created_at
+        , created_by
+        , updated_at
+        , updated_by
+        , is_active
+        , is_deleted
+        FROM product
+        WHERE lower(product_name) LIKE CONCAT('%', lower(#{keyword}), '%')
+        AND is_deleted = 0
+    </select>
+
+</mapper>

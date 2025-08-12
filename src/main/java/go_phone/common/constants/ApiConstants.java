@@ -11,7 +11,7 @@ public class ApiConstants {
         public static final String BASE = VERSION_V1 + "/user";
         public static final String GET_ALL = "/get";
         public static final String GET_BY_ID = "/get/{id}";
-        public static final String ADD = "/add";
+        public static final String ADD = "/create";
         public static final String UPDATE = "/update/{id}";
         public static final String DELETE = "/delete/{id}";
 
@@ -23,8 +23,9 @@ public class ApiConstants {
         public static final String BASE = VERSION_V1 + "/product";
         public static final String GET_ALL = "/get";
         public static final String GET_BY_ID = "/get/{id}";
-        public static final String ADD = "/add";
+        public static final String ADD = "/create";
         public static final String UPDATE = "/update/{id}";
+        public static final String SOFT_DELETE = "/delete/{id}";
         public static final String DELETE = "/delete/{id}";
 
         private Product() {
