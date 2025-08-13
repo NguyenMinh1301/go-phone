@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="go_phone.feature.category.mapper.BrandMapper">
+
+    <resultMap id="BrandResult" type="go_phone.feature.category.entity.Brand">
+        <id property="brandId"          column="brand_id"/>
+        <result property="name"         column="name"/>
+        <result property="description"  column="description"/>
+        <result property="createdAt"    column="created_at"/>
+        <result property="createdBy"    column="created_by"/>
+        <result property="updatedAt"    column="updated_at"/>
+        <result property="updatedBy"    column="updated_by"/>
+        <result property="isActive"     column="is_active"/>
+        <result property="isDeleted"    column="is_deleted"/>
+    </resultMap>
+
+    <select id="findAll" resultMap="BrandResult">
+        SELECT
+        brand_id
+        , name
+        , description
+        , created_at
+        , created_by
+        , updated_at
+        , updated_by
+        , is_active
+        , is_deleted
+        FROM brand
+        WHERE is_deleted = 0
+    </select>
+
+    <select id="findById" parameterType="int" resultMap="BrandResult">
+        SELECT
+        brand_id
+        , name
+        , description
+        , created_at
+        , created_by
+        , updated_at
+        , updated_by
+        , is_active
+        , is_deleted
+        FROM brand
+        WHERE brand_id = #{id}
+        AND is_deleted = 0
+    </select>
+
+    <insert id="insert" parameterType="go_phone.feature.category.entity.Brand" useGeneratedKeys="true" keyProperty="brandId">
+        INSERT INTO brand (
+        name
+        , description
+        , created_by
+        , is_active
+        , is_deleted
+        ) VALUES (
+        #{name}
+        , #{description}
+        , #{createdBy}
+        , #{isActive}
+        , #{isDeleted})
+    </insert>
+
+    <update id="update" parameterType="go_phone.feature.category.entity.Brand">
+        UPDATE brand
+        SET name = #{name},
+        description = #{description},
+        updated_at = NOW(),
+        updated_by = #{updatedBy},
+        is_active = #{isActive}
+        WHERE brand_id = #{brandId}
+    </update>
+
+    <update id="softDeleteById" parameterType="int">
+        UPDATE brand
+        SET is_deleted = 1
+        WHERE brand_id = #{id}
+    </update>
+
+    <select id="searchByName" parameterType="string" resultMap="BrandResult">
+        SELECT
+        brand_id
+        , name
+        , description
+        , created_at
+        , created_by
+        , updated_at
+        , updated_by
+        , is_active
+        , is_deleted
+        FROM brand
+        WHERE lower(name) LIKE CONCAT('%', lower(#{keyword}), '%')
+        AND is_deleted = 0
+    </select>
+
+    <select id="existsByName" parameterType="string" resultType="boolean">
+        SELECT COUNT(*) > 0
+        FROM brand
+        WHERE lower(name) = lower(#{name})
+        AND is_deleted = 0
+    </select>
+
+
+    <select id="findAllPageable" resultMap="BrandResult">
+        SELECT
+        brand_id
+        , name
+        , description
+        , created_at
+        , created_by
+        , updated_at
+        , updated_by
+        , is_active
+        , is_deleted
+        FROM brand
+        WHERE is_deleted = 0
+        ORDER BY created_at DESC
+        LIMIT #{limit} OFFSET #{offset}
+    </select>
+
+    <select id="searchPageable" parameterType="map" resultMap="BrandResult">
+        SELECT
+        brand_id
+        , name
+        , description
+        , created_at
+        , created_by
+        , updated_at
+        , updated_by
+        , is_active
+        , is_deleted
+        FROM brand
+        WHERE name COLLATE utf8mb4_unicode_ci LIKE CONCAT('%', #{keyword}, '%')
+        AND is_deleted = 0
+        ORDER BY created_at DESC
+        LIMIT #{limit} OFFSET #{offset}
+    </select>
+
+    <select id="countAll" resultType="int">
+        SELECT COUNT(*)
+        FROM brand
+        WHERE is_deleted = 0
+    </select>
+
+    <select id="countSearch" parameterType="string" resultType="int">
+        SELECT COUNT(*)
+        FROM brand
+        WHERE lower(name) LIKE CONCAT('%', lower(#{keyword}), '%')
+        AND is_deleted = 0
+    </select>
+
+</mapper>

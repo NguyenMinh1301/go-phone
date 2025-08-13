@@ -9,9 +9,12 @@ public interface BaseMapper<T> {
 
     List<T> findAll();
 
-//    List<T> findAllPaged(@Param("offset") int offset,
-//                         @Param("limit") int limit,
-//                         @Param("paging") PageRequest pageRequest);
+    List<T> findAllPageable(@Param("offset") int offset,
+                            @Param("limit") int limit);
+
+    List<T> searchPageable(@Param("keyword") String keyword,
+                           @Param("offset") int offset,
+                           @Param("limit") int limit);
 
     int insert(T entity);
 
@@ -23,5 +26,10 @@ public interface BaseMapper<T> {
 
     boolean existsById(@Param("id") Integer id);
 
+    boolean existsByName(@Param("name") String name);
+
     int countAll();
+
+    int countSearch(String keyword);
+
 }

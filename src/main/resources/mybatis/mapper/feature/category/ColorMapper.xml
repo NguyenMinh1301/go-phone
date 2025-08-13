@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="go_phone.feature.category.mapper.ColorMapper">
+
+    <resultMap id="ColorResult" type="go_phone.feature.category.entity.Color">
+        <id property="colorId"          column="color_id"/>
+        <result property="name"         column="name"/>
+        <result property="hexCode"      column="hex_code"/>
+        <result property="createdAt"    column="created_at"/>
+        <result property="createdBy"    column="created_by"/>
+        <result property="updatedAt"    column="updated_at"/>
+        <result property="updatedBy"    column="updated_by"/>
+        <result property="isActive"     column="is_active"/>
+        <result property="isDeleted"    column="is_deleted"/>
+    </resultMap>
+
+    <select id="findAll" resultMap="ColorResult">
+        SELECT
+        color_id
+        , name
+        , hex_code
+        , created_at
+        , created_by
+        , updated_at
+        , updated_by
+        , is_active
+        , is_deleted
+        FROM color
+        WHERE is_deleted = 0
+    </select>
+
+    <select id="findById" parameterType="int" resultMap="ColorResult">
+        SELECT color_id
+        , name
+        , hex_code
+        , created_at
+        , created_by
+        , updated_at
+        , updated_by
+        , is_active
+        , is_deleted
+        FROM color
+        WHERE color_id = #{id}
+        AND is_deleted = 0
+    </select>
+
+    <insert id="insert" parameterType="go_phone.feature.category.entity.Color" useGeneratedKeys="true" keyProperty="colorId">
+        INSERT INTO color (
+        name
+        , hex_code
+        , created_by
+        , is_active
+        , is_deleted
+        ) VALUES (
+        #{name}
+        , #{hexCode}
+        , #{createdBy}
+        , #{isActive}
+        , #{isDeleted})
+    </insert>
+
+    <update id="update" parameterType="go_phone.feature.category.entity.Color">
+        UPDATE color
+        SET name = #{name},
+        hex_code = #{hexCode},
+        updated_at = NOW(),
+        updated_by = #{updatedBy},
+        is_active = #{isActive}
+        WHERE color_id = #{colorId}
+    </update>
+
+    <update id="softDeleteById" parameterType="int">
+        UPDATE color SET is_deleted = 1 WHERE color_id = #{id}
+    </update>
+
+    <select id="existsByName" parameterType="string" resultType="boolean">
+        SELECT COUNT(*) > 0
+        FROM color
+        WHERE lower(name) = lower(#{name})
+        AND is_deleted = 0
+    </select>
+
+    <select id="findAllPageable" parameterType="map" resultMap="ColorResult">
+        SELECT
+        color_id
+        , name
+        , hex_code
+        , created_at
+        , created_by
+        , updated_at
+        , updated_by
+        , is_active
+        , is_deleted
+        FROM color
+        WHERE is_deleted = 0
+        ORDER BY created_at DESC
+        LIMIT #{limit} OFFSET #{offset}
+    </select>
+
+    <select id="searchPageable" parameterType="map" resultMap="ColorResult">
+        SELECT
+        color_id
+        , name
+        , hex_code
+        , created_at
+        , created_by
+        , updated_at
+        , updated_by
+        , is_active
+        , is_deleted
+        FROM color
+        WHERE name COLLATE utf8mb4_unicode_ci LIKE CONCAT('%', #{keyword}, '%')
+        AND is_deleted = 0
+        ORDER BY created_at DESC
+        LIMIT #{limit} OFFSET #{offset}
+    </select>
+
+    <select id="countAll" resultType="int">
+        SELECT COUNT(*)
+        FROM color
+        WHERE is_deleted = 0
+    </select>
+
+    <select id="countSearch" parameterType="string" resultType="int">
+        SELECT COUNT(*)
+        FROM color
+        WHERE lower(name) LIKE CONCAT('%', lower(#{keyword}), '%')
+        AND is_deleted = 0
+    </select>
+
+</mapper>

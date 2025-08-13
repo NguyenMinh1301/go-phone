@@ -1,19 +1,11 @@
 package go_phone.feature.product.service;
 
-import go_phone.feature.product.entity.Product;
+import go_phone.common.service.BaseService;
+import go_phone.feature.product.dto.request.ProductRequest;
+import go_phone.feature.product.dto.response.ProductResponse;
 
 import java.util.List;
 
-public interface ProductService {
-
-    List<Product> getAllProducts();
-
-    Product getProductById(Integer id);
-
-    int addProduct(Product product);
-
-    int updateProduct(Product product);
-
-    int softDeleteProduct(Integer id, String updatedBy);
+public interface ProductService extends BaseService<ProductRequest, ProductResponse, Integer> {
 
 }
