@@ -9,9 +9,8 @@ public interface BaseMapper<T> {
 
     List<T> findAll();
 
-//    List<T> findAllPaged(@Param("offset") int offset,
-//                         @Param("limit") int limit,
-//                         @Param("paging") PageRequest pageRequest);
+    List<T> findAllPageable(@Param("offset") int offset,
+                            @Param("limit") int limit);
 
     int insert(T entity);
 

@@ -22,6 +22,7 @@ public class ApiConstants {
     public static final class Product {
         public static final String BASE = VERSION_V1 + "/product";
         public static final String GET_ALL = "/get";
+        public static final String GET_ALL_PAGEABLE = "/page";
         public static final String GET_BY_ID = "/get/{id}";
         public static final String ADD = "/create";
         public static final String UPDATE = "/update/{id}";

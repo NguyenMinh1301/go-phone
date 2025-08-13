@@ -12,7 +12,7 @@ public interface BaseService<REQ, RES, I> {
 
     List<RES> findAll();
 
-//    PageResponse<RES> search(PageRequest pageRequest);
+    List<RES> findAllPageable(int offset, int limit);
 
     int delete(I id);
 
