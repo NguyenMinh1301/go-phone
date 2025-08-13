@@ -322,4 +322,10 @@
         AND is_deleted = 0
     </select>
 
+    <select id="existsByName" resultType="boolean">
+        SELECT COUNT(1) > 0
+        FROM product
+        WHERE product_name = #{name} AND is_deleted = 0
+    </select>
+
 </mapper>
