@@ -2,7 +2,6 @@ package go_phone.feature.product.service.Impl;
 
 import go_phone.common.exception.AppException;
 import go_phone.common.exception.ErrorCode;
-import go_phone.feature.category.entity.Brand;
 import go_phone.feature.product.converter.ProductConverter;
 import go_phone.feature.product.dto.request.ProductRequest;
 import go_phone.feature.product.dto.response.ProductResponse;
