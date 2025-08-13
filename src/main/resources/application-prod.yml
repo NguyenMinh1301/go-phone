@@ -1,0 +1,22 @@
+server:
+  port: 8889
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: never
+  health:
+    db:
+      enabled: true
+    diskspace:
+      enabled: true
+    ping:
+      enabled: true
+    livenessstate:
+      enabled: false
+    readinessstate:
+      enabled: false

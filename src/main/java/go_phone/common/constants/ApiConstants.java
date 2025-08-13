@@ -50,12 +50,4 @@ public class ApiConstants {
         }
     }
 
-    public static final class Health {
-        public static final String HEALTH = "/health";
-        public static final String HEALTH_DB = HEALTH + "/db";
-
-        private Health() {
-        }
-    }
-
 }

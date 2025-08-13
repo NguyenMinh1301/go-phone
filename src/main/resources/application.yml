@@ -10,6 +10,26 @@ spring:
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+  health:
+    db:
+      enabled: true
+    diskspace:
+      enabled: true
+    ping:
+      enabled: true
+    livenessstate:
+      enabled: true
+    readinessstate:
+      enabled: true
+
 mybatis:
   config-location: classpath:mybatis/configuration/mybatis-config.xml
   mapper-locations: classpath:mybatis/mapper/**/*.xml
