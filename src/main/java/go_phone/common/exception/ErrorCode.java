@@ -18,14 +18,24 @@ public enum ErrorCode {
     PRODUCT_EXISTED("2001", "Sản phẩm đã tồn tại"),
     PRODUCT_EMPTY("2002", "Không có sản phẩm tồn tại"),
 
-    BRAND_NOT_FOUND("2100", "Thuộc tính đã tồn tại"),
-    BRAND_EXISTED("2101", "Không tìm thấy thuộc tính"),
-    BRAND_EMPTY("2102", "Không có thuộc tính tồn tại"),
+    //=========== BRAND ============
+    BRAND_NOT_FOUND("2100", "Không tìm thấy thương hiệu"),
+    BRAND_EXISTED("2101", "Thương hiệu đã tồn tại"),
+    BRAND_EMPTY("2102", "Không có thương hiệu tồn tại"),
 
+    //=========== COLOR ============
+    COLOR_NOT_FOUND("2200", "Không tìm thấy màu sắc"),
+    COLOR_EXISTED("2201", "Màu sắc đã tồn tại"),
+    COLOR_EMPTY("2202", "Không có màu sắc tồn tại"),
 
-    BAD_SQL("1001", "Sai câu lệnh sql"),
-    INTERNAL_ERROR("5000", "Lỗi hệ thống"),
-    ;
+    //=========== MADE FROM ============
+    MADE_FROM_NOT_FOUND("2300", "Không tìm thấy xuất xứ"),
+    MADE_FROM_EXISTED("2301", "Xuất xứ đã tồn tại"),
+    MADE_FROM_EMPTY("2302", "Không có xuất xứ tồn tại"),
+
+    //=========== SYSTEM ============
+    BAD_SQL("1001", "Sai câu lệnh SQL"),
+    INTERNAL_ERROR("5000", "Lỗi hệ thống");
 
     private final String code;
     private final String message;

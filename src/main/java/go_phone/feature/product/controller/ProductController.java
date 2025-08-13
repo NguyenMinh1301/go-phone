@@ -35,6 +35,7 @@ public class ProductController {
         return ResponseHandler.success(productService.findAllPageable(page, size));
     }
 
+    // Tìm kiếm sản phẩm Pageable
     @GetMapping(ApiConstants.Product.SEARCH_PAGEABLE)
     public ResponseEntity<ApiResponse<PageResponse<ProductResponse>>> searchPageable(@RequestParam(required = false) String keyword,
                                                                                      @RequestParam(defaultValue = "0") int page,

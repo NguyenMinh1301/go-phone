@@ -2,6 +2,7 @@ package go_phone.feature.category.controller;
 
 import go_phone.common.constants.ApiConstants;
 import go_phone.common.response.ApiResponse;
+import go_phone.common.response.PageResponse;
 import go_phone.common.response.ResponseHandler;
 import go_phone.feature.category.converter.BrandConverter;
 import go_phone.feature.category.dto.request.BrandRequest;
@@ -25,6 +26,21 @@ public class BrandController {
     @GetMapping(ApiConstants.Category.BRAND + ApiConstants.Category.GET_ALL)
     public ResponseEntity<ApiResponse<List<BrandResponse>>> getAll() {
         return ResponseHandler.success(brandService.findAll());
+    }
+
+    // Lấy toàn bộ brand Pageable
+    @GetMapping(ApiConstants.Category.BRAND + ApiConstants.Category.GET_ALL_PAGEABLE)
+    public ResponseEntity<ApiResponse<PageResponse<BrandResponse>>> getAllPageable(@RequestParam(defaultValue = "0") int page,
+                                                                                   @RequestParam(defaultValue = "10") int size) {
+        return ResponseHandler.success(brandService.findAllPageable(page, size));
+    }
+
+    // Tìm kiếm brand Pageable
+    @GetMapping(ApiConstants.Category.BRAND + ApiConstants.Category.SEARCH_PAGEABLE)
+    public ResponseEntity<ApiResponse<PageResponse<BrandResponse>>> searchPageable(@RequestParam(required = false) String keyword,
+                                                                                   @RequestParam(defaultValue = "0") int page,
+                                                                                   @RequestParam(defaultValue = "10") int size) {
+        return ResponseHandler.success(brandService.searchPageable(keyword, page, size));
     }
 
     // Lấy brand theo id

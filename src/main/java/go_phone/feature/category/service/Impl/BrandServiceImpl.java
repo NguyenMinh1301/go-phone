@@ -2,6 +2,8 @@ package go_phone.feature.category.service.Impl;
 
 import go_phone.common.exception.AppException;
 import go_phone.common.exception.ErrorCode;
+import go_phone.common.handler.CalculateOffset;
+import go_phone.common.response.PageResponse;
 import go_phone.feature.category.converter.BrandConverter;
 import go_phone.feature.category.dto.request.BrandRequest;
 import go_phone.feature.category.dto.response.BrandResponse;
@@ -19,6 +21,7 @@ public class BrandServiceImpl implements BrandService {
 
     private final BrandMapper brandMapper;
     private final BrandConverter brandConverter;
+    private final CalculateOffset calculateOffset = new CalculateOffset();
 
     @Override
     public int create(BrandRequest dto) {
@@ -56,6 +59,26 @@ public class BrandServiceImpl implements BrandService {
             throw new AppException(ErrorCode.BRAND_EMPTY);
         }
         return brandConverter.toResponseList(brands);
+    }
+
+    @Override
+    public PageResponse<BrandResponse> findAllPageable(int page, int size) {
+
+        int offset = calculateOffset.calculateOffset(page, size);
+
+        List<Brand> brands = brandMapper.findAllPageable(offset, size);
+        int totalBrand = brandMapper.countAll();
+        return brandConverter.toResponsePage(brands, page, size, totalBrand);
+    }
+
+    @Override
+    public PageResponse<BrandResponse> searchPageable(String keyword, int page, int size) {
+
+        int offset = calculateOffset.calculateOffset(page, size);
+
+        List<Brand> brands = brandMapper.searchPageable(keyword, offset, size);
+        int totalBrand = brandMapper.countSearch(keyword);
+        return brandConverter.toResponsePage(brands, page, size, totalBrand);
     }
 
     @Override

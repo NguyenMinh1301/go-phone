@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="go_phone.feature.category.mapper.MadeFromMapper">
+
+    <resultMap id="MadeFromResult" type="go_phone.feature.category.entity.MadeFrom">
+        <id property="madeFromId"           column="made_from_id"/>
+        <result property="countryName"      column="country_name"/>
+        <result property="description"      column="description"/>
+        <result property="createdAt"        column="created_at"/>
+        <result property="createdBy"        column="created_by"/>
+        <result property="updatedAt"        column="updated_at"/>
+        <result property="updatedBy"        column="updated_by"/>
+        <result property="isActive"         column="is_active"/>
+        <result property="isDeleted"        column="is_deleted"/>
+    </resultMap>
+
+    <select id="findAll" resultMap="MadeFromResult">
+        SELECT
+        made_from_id
+        , country_name
+        , description
+        , created_at
+        , created_by
+        , updated_at
+        , updated_by
+        , is_active
+        , is_deleted
+        FROM made_from
+        WHERE is_deleted = 0
+    </select>
+
+    <select id="findById" parameterType="int" resultMap="MadeFromResult">
+        SELECT
+        made_from_id
+        , country_name
+        , description
+        , created_at
+        , created_by
+        , updated_at
+        , updated_by
+        , is_active
+        , is_deleted
+        FROM made_from
+        WHERE made_from_id = #{id}
+        AND is_deleted = 0
+    </select>
+
+    <insert id="insert" parameterType="go_phone.feature.category.entity.MadeFrom" useGeneratedKeys="true" keyProperty="madeFromId">
+        INSERT INTO made_from (
+        country_name
+        , description
+        , created_by
+        , is_active
+        , is_deleted
+        ) VALUES (
+        #{countryName}
+        , #{description}
+        , #{createdBy}
+        , #{isActive}
+        , #{isDeleted}
+        )
+    </insert>
+
+    <update id="update" parameterType="go_phone.feature.category.entity.MadeFrom">
+        UPDATE made_from
+        SET country_name = #{countryName},
+        description = #{description},
+        updated_at = NOW(),
+        updated_by = #{updatedBy},
+        is_active = #{isActive}
+        WHERE made_from_id = #{madeFromId}
+    </update>
+
+    <update id="softDeleteById" parameterType="int">
+        UPDATE made_from
+        SET is_deleted = 1
+        WHERE made_from_id = #{id}
+    </update>
+
+    <select id="existsByName" parameterType="string" resultType="boolean">
+        SELECT COUNT(*) > 0
+        FROM made_from
+        WHERE lower(country_name) = lower(#{name})
+        AND is_deleted = 0
+    </select>
+
+    <select id="findAllPageable" parameterType="map" resultMap="MadeFromResult">
+        SELECT
+        made_from_id
+        , country_name
+        , description
+        , created_at
+        , created_by
+        , updated_at
+        , updated_by
+        , is_active
+        , is_deleted
+        FROM made_from
+        WHERE is_deleted = 0
+        ORDER BY created_at DESC
+        LIMIT #{limit} OFFSET #{offset}
+    </select>
+
+    <select id="searchPageable" parameterType="map" resultMap="MadeFromResult">
+        SELECT
+        made_from_id
+        , country_name
+        , description
+        , created_at
+        , created_by
+        , updated_at
+        , updated_by
+        , is_active
+        , is_deleted
+        FROM made_from
+        WHERE country_name COLLATE utf8mb4_unicode_ci LIKE CONCAT('%', #{keyword}, '%')
+        AND is_deleted = 0
+        ORDER BY created_at DESC
+        LIMIT #{limit} OFFSET #{offset}
+    </select>
+
+    <select id="countAll" resultType="int">
+        SELECT COUNT(*)
+        FROM made_from
+        WHERE is_deleted = 0
+    </select>
+
+    <select id="countSearch" parameterType="string" resultType="int">
+        SELECT COUNT(*)
+        FROM made_from
+        WHERE lower(country_name) LIKE CONCAT('%', lower(#{keyword}), '%')
+        AND is_deleted = 0
+    </select>
+
+</mapper>

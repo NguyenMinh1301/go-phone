@@ -30,8 +30,6 @@ public interface BaseMapper<T> {
 
     int countAll();
 
-    int countPageable();
-
     int countSearch(String keyword);
 
 }
