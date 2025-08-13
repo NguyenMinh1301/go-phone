@@ -27,6 +27,13 @@ public class ProductController {
         return ResponseHandler.success(productService.findAll());
     }
 
+    // Lấy toàn bộ sản phẩm Pageable
+    @GetMapping(ApiConstants.Product.GET_ALL_PAGEABLE)
+    public ResponseEntity<ApiResponse<List<ProductResponse>>> getAllPageable(@RequestParam(defaultValue = "0") int offset,
+                                                                                     @RequestParam(defaultValue = "10") int limit) {
+        return ResponseHandler.success(productService.findAllPageable(offset, limit));
+    }
+
     // Lấy sản phẩm theo ID
     @GetMapping(ApiConstants.Product.GET_BY_ID)
     public ResponseEntity<ApiResponse<ProductResponse>> getById(@PathVariable("id") Integer id) {

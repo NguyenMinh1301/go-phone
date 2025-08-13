@@ -69,4 +69,10 @@ public class ProductServiceImpl implements ProductService {
         }
         return productMapper.softDeleteById(id);
     }
+
+    @Override
+    public List<ProductResponse> findAllPageable(int offset, int limit) {
+        List<Product> products = productMapper.findAllPageable(offset, limit);
+        return productConverter.toResponseList(products);
+    }
 }

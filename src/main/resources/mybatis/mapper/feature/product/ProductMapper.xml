@@ -328,4 +328,47 @@
         WHERE product_name = #{name} AND is_deleted = 0
     </select>
 
+    <select id="findAllPageable" resultMap="ProductResult">
+        SELECT
+        product_id
+        , brand_id
+        , color_id
+        , made_from_id
+        , product_name
+        , screen_size
+        , screen_details
+        , screen_resolution
+        , screen_refresh_rate
+        , camera_front
+        , camera_front_details
+        , camera_rear
+        , camera_rear_details
+        , chipset
+        , gpu
+        , nfc
+        , sim
+        , audio_port
+        , gps
+        , ram
+        , storage_capacity
+        , operating_system
+        , size
+        , weight
+        , back_material
+        , frame_material
+        , wifi
+        , bluetooth
+        , note
+        , created_at
+        , created_by
+        , updated_at
+        , updated_by
+        , is_active
+        , is_deleted
+        FROM product
+        WHERE is_deleted = 0
+        ORDER BY created_at DESC
+        LIMIT #{limit} OFFSET #{offset}
+    </select>
+
 </mapper>

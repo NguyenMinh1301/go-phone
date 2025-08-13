@@ -4,6 +4,8 @@ import go_phone.common.service.BaseService;
 import go_phone.feature.product.dto.request.ProductRequest;
 import go_phone.feature.product.dto.response.ProductResponse;
 
+import java.util.List;
+
 public interface ProductService extends BaseService<ProductRequest, ProductResponse, Integer> {
 
 }
