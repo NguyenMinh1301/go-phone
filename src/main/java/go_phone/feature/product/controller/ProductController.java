@@ -30,9 +30,16 @@ public class ProductController {
 
     // Lấy toàn bộ sản phẩm Pageable
     @GetMapping(ApiConstants.Product.GET_ALL_PAGEABLE)
-    public ResponseEntity<ApiResponse<PageResponse<ProductResponse>>> getAllPageable(@RequestParam(defaultValue = "0") int offset,
-                                                                                     @RequestParam(defaultValue = "10") int limit) {
-        return ResponseHandler.success(productService.findAllPageable(offset, limit));
+    public ResponseEntity<ApiResponse<PageResponse<ProductResponse>>> getAllPageable(@RequestParam(defaultValue = "0") int page,
+                                                                                     @RequestParam(defaultValue = "10") int size) {
+        return ResponseHandler.success(productService.findAllPageable(page, size));
+    }
+
+    @GetMapping(ApiConstants.Product.SEARCH_PAGEABLE)
+    public ResponseEntity<ApiResponse<PageResponse<ProductResponse>>> searchPageable(@RequestParam(required = false) String keyword,
+                                                                                     @RequestParam(defaultValue = "0") int page,
+                                                                                     @RequestParam(defaultValue = "10") int size) {
+        return ResponseHandler.success(productService.searchPageable(keyword, page, size));
     }
 
     // Lấy sản phẩm theo ID

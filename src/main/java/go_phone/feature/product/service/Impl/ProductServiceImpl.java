@@ -2,6 +2,7 @@ package go_phone.feature.product.service.Impl;
 
 import go_phone.common.exception.AppException;
 import go_phone.common.exception.ErrorCode;
+import go_phone.common.handler.CalculateOffset;
 import go_phone.common.response.PageResponse;
 import go_phone.feature.product.converter.ProductConverter;
 import go_phone.feature.product.dto.request.ProductRequest;
@@ -21,7 +22,7 @@ public class ProductServiceImpl implements ProductService {
 
     private final ProductMapper productMapper;
     private final ProductConverter productConverter;
-
+    private final CalculateOffset calculateOffset = new CalculateOffset();
 
     @Override
     public int create(ProductRequest dto) {
@@ -72,9 +73,22 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public PageResponse<ProductResponse> findAllPageable(int offset, int limit) {
-        List<Product> products = productMapper.findAllPageable(offset, limit);
-        int total = productMapper.countAll();
-        return productConverter.toResponsePage(products, offset, limit, total);
+    public PageResponse<ProductResponse> findAllPageable(int page, int size) {
+
+        int offset = calculateOffset.calculateOffset(page, size);
+
+        List<Product> products = productMapper.findAllPageable(offset, size);
+        int totalProduct = productMapper.countAll();
+        return productConverter.toResponsePage(products, page, size, totalProduct);
+    }
+
+    @Override
+    public PageResponse<ProductResponse> searchPageable(String keyword, int page, int size) {
+
+        int offset = calculateOffset.calculateOffset(page, size);
+
+        List<Product> products = productMapper.searchPageable(keyword, offset, size);
+        int totalProduct = productMapper.countSearch(keyword);
+        return productConverter.toResponsePage(products, page, size, totalProduct);
     }
 }

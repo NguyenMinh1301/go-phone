@@ -23,6 +23,7 @@ public class ApiConstants {
         public static final String BASE = VERSION_V1 + "/product";
         public static final String GET_ALL = "/get";
         public static final String GET_ALL_PAGEABLE = "/page";
+        public static final String SEARCH_PAGEABLE = "/search";
         public static final String GET_BY_ID = "/get/{id}";
         public static final String ADD = "/create";
         public static final String UPDATE = "/update/{id}";
@@ -38,6 +39,7 @@ public class ApiConstants {
         public static final String COLOR = "/color";
         public static final String MADE_FROM = "/made-from";
         public static final String GET_ALL = "/get";
+        public static final String GET_ALL_PAGEABLE = "/page";
         public static final String GET_BY_ID = "/get/{id}";
         public static final String ADD = "/create";
         public static final String UPDATE = "/update/{id}";

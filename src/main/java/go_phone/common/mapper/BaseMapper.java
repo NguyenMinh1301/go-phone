@@ -12,6 +12,10 @@ public interface BaseMapper<T> {
     List<T> findAllPageable(@Param("offset") int offset,
                             @Param("limit") int limit);
 
+    List<T> searchPageable(@Param("keyword") String keyword,
+                           @Param("offset") int offset,
+                           @Param("limit") int limit);
+
     int insert(T entity);
 
     int update(T entity);
@@ -25,4 +29,9 @@ public interface BaseMapper<T> {
     boolean existsByName(@Param("name") String name);
 
     int countAll();
+
+    int countPageable();
+
+    int countSearch(String keyword);
+
 }

@@ -14,7 +14,9 @@ public interface BaseService<REQ, RES, I> {
 
     List<RES> findAll();
 
-    PageResponse<RES> findAllPageable(int offset, int limit);
+    PageResponse<RES> findAllPageable(int page, int size);
+
+    PageResponse<RES> searchPageable(String keyword, int page, int size);
 
     int delete(I id);
 
