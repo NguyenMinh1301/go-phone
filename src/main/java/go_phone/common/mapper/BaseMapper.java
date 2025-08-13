@@ -23,5 +23,7 @@ public interface BaseMapper<T> {
 
     boolean existsById(@Param("id") Integer id);
 
+    boolean existsByName(@Param("name") String name);
+
     int countAll();
 }
