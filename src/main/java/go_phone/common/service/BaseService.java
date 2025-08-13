@@ -4,6 +4,11 @@ import go_phone.common.response.PageResponse;
 
 import java.util.List;
 
+/**
+ * @param <REQ>  Request DTO (create/update)
+ * @param <RES>  Response DTO
+ * @param <I>    Id
+ */
 public interface BaseService<REQ, RES, I> {
 
     int create(REQ dto);
