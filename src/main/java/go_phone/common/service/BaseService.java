@@ -1,5 +1,7 @@
 package go_phone.common.service;
 
+import go_phone.common.response.PageResponse;
+
 import java.util.List;
 
 public interface BaseService<REQ, RES, I> {
@@ -12,7 +14,7 @@ public interface BaseService<REQ, RES, I> {
 
     List<RES> findAll();
 
-    List<RES> findAllPageable(int offset, int limit);
+    PageResponse<RES> findAllPageable(int offset, int limit);
 
     int delete(I id);
 
