@@ -2,6 +2,7 @@ package go_phone.feature.product.service.Impl;
 
 import go_phone.common.exception.AppException;
 import go_phone.common.exception.ErrorCode;
+import go_phone.common.response.PageResponse;
 import go_phone.feature.product.converter.ProductConverter;
 import go_phone.feature.product.dto.request.ProductRequest;
 import go_phone.feature.product.dto.response.ProductResponse;
@@ -71,8 +72,9 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductResponse> findAllPageable(int offset, int limit) {
+    public PageResponse<ProductResponse> findAllPageable(int offset, int limit) {
         List<Product> products = productMapper.findAllPageable(offset, limit);
-        return productConverter.toResponseList(products);
+        int total = productMapper.countAll();
+        return productConverter.toResponsePage(products, offset, limit, total);
     }
 }

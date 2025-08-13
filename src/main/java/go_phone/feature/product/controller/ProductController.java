@@ -2,6 +2,7 @@ package go_phone.feature.product.controller;
 
 import go_phone.common.constants.ApiConstants;
 import go_phone.common.response.ApiResponse;
+import go_phone.common.response.PageResponse;
 import go_phone.common.response.ResponseHandler;
 import go_phone.feature.product.converter.ProductConverter;
 import go_phone.feature.product.dto.request.ProductRequest;
@@ -29,7 +30,7 @@ public class ProductController {
 
     // Lấy toàn bộ sản phẩm Pageable
     @GetMapping(ApiConstants.Product.GET_ALL_PAGEABLE)
-    public ResponseEntity<ApiResponse<List<ProductResponse>>> getAllPageable(@RequestParam(defaultValue = "0") int offset,
+    public ResponseEntity<ApiResponse<PageResponse<ProductResponse>>> getAllPageable(@RequestParam(defaultValue = "0") int offset,
                                                                                      @RequestParam(defaultValue = "10") int limit) {
         return ResponseHandler.success(productService.findAllPageable(offset, limit));
     }
