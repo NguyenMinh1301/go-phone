@@ -1,5 +1,6 @@
 package go_phone.feature.product.entity;
 
+import go_phone.common.model.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,7 +13,7 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Product {
+public class Product extends BaseEntity {
 
     Integer productId;
     Integer brandId;
@@ -50,11 +51,6 @@ public class Product {
 
     String note;
 
-    String createdAt;
-    String createdBy;
-    String updatedAt;
-    String updatedBy;
     Integer isActive;
-    Integer isDeleted;
 
 }
