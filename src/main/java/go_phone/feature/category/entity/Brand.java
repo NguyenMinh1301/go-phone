@@ -1,5 +1,6 @@
 package go_phone.feature.category.entity;
 
+import go_phone.common.model.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,17 +13,12 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Brand {
+public class Brand extends BaseEntity {
 
     Integer brandId;
     String name;
     String description;
 
-    String createdAt;
-    String createdBy;
-    String updatedAt;
-    String updatedBy;
     Integer isActive;
-    Integer isDeleted;
 
 }

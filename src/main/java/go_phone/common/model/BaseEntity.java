@@ -1,6 +1,5 @@
-package go_phone.feature.category.entity;
+package go_phone.common.model;
 
-import go_phone.common.model.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,15 +9,19 @@ import lombok.experimental.FieldDefaults;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class MadeFrom extends BaseEntity {
+public abstract class BaseEntity {
 
-    Integer madeFromId;
-    String countryName;
-    String description;
+    private String createdAt;
 
-    Integer isActive;
+    private String createdBy;
+
+    private String updatedAt;
+
+    private String updatedBy;
+
+    private Integer isDeleted;
 
 }
