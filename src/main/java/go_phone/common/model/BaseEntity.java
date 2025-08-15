@@ -7,8 +7,6 @@ import lombok.Setter;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 
-import java.time.LocalDateTime;
-
 @Getter
 @Setter
 @AllArgsConstructor
@@ -16,14 +14,14 @@ import java.time.LocalDateTime;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public abstract class BaseEntity {
 
-    private LocalDateTime createdAt;
+    private String createdAt;
 
-    private Integer createdBy;
+    private String createdBy;
 
-    private LocalDateTime updatedAt;
+    private String updatedAt;
 
-    private Integer updatedBy;
+    private String updatedBy;
 
-    private Boolean isDeleted;
+    private Integer isDeleted;
 
 }
