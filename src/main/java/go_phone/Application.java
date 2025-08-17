@@ -10,6 +10,12 @@ public class Application {
 	public static void main(String[] args) {
 
 		// Load .env
+		loadEnv();
+
+		SpringApplication.run(Application.class, args);
+	}
+
+	private static void loadEnv() {
 		Dotenv dotenv = Dotenv.configure()
 				.directory("./")
 				.filename(".env")
@@ -18,8 +24,9 @@ public class Application {
 		System.setProperty("DB_URL", dotenv.get("DB_URL"));
 		System.setProperty("DB_USERNAME", dotenv.get("DB_USERNAME"));
 		System.setProperty("DB_PASSWORD", dotenv.get("DB_PASSWORD"));
-
-		SpringApplication.run(Application.class, args);
+		System.setProperty("JWT_SECRET", dotenv.get("JWT_SECRET"));
+		System.setProperty("ACCESS-TOKEN-EXP", dotenv.get("ACCESS-TOKEN-EXP"));
+		System.setProperty("REFRESH-TOKEN-EXP", dotenv.get("REFRESH-TOKEN-EXP"));
 	}
 
 }
