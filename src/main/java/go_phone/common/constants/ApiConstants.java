@@ -7,15 +7,13 @@ public class ApiConstants {
     public static final String BASE_API = "/api";
     public static final String VERSION_V1 = BASE_API + "/v1";
 
-    public static final class User {
-        public static final String BASE = VERSION_V1 + "/user";
-        public static final String GET_ALL = "/get";
-        public static final String GET_BY_ID = "/get/{id}";
-        public static final String ADD = "/create";
-        public static final String UPDATE = "/update/{id}";
-        public static final String DELETE = "/delete/{id}";
+    public static final class Auth {
+        public static final String BASE = VERSION_V1 + "/auth";
+        public static final String REGISTER = "/register";
+        public static final String LOGIN = "/login";
+        public static final String REFRESH_TOKEN = "/refresh";
 
-        private User() {
+        private Auth() {
         }
     }
 
