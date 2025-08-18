@@ -13,32 +13,30 @@ import lombok.Getter;
 @Getter
 public enum ErrorCode {
 
-    //=========== PRODUCT ===========
+    NOT_FOUND("2000", "Không tìm thấy"),
+    ALREADY_EXIST("2000", "Đã tồn tại"),
+    USERNAME_ALREADY_EXIST("2000", "Username đã tồn tại"),
+    EMAIL_ALREADY_EXIST("2000", "email đã tồn tại"),
     PRODUCT_NOT_FOUND("2000", "Không tìm thấy sản phẩm"),
-    PRODUCT_EXISTED("2001", "Sản phẩm đã tồn tại"),
-    PRODUCT_EMPTY("2002", "Không có sản phẩm tồn tại"),
-
-    //=========== BRAND ============
-    BRAND_NOT_FOUND("2100", "Không tìm thấy thương hiệu"),
-    BRAND_EXISTED("2101", "Thương hiệu đã tồn tại"),
-    BRAND_EMPTY("2102", "Không có thương hiệu tồn tại"),
-
-    //=========== COLOR ============
-    COLOR_NOT_FOUND("2200", "Không tìm thấy màu sắc"),
-    COLOR_EXISTED("2201", "Màu sắc đã tồn tại"),
-    COLOR_EMPTY("2202", "Không có màu sắc tồn tại"),
-
-    //=========== MADE FROM ============
-    MADE_FROM_NOT_FOUND("2300", "Không tìm thấy xuất xứ"),
-    MADE_FROM_EXISTED("2301", "Xuất xứ đã tồn tại"),
-    MADE_FROM_EMPTY("2302", "Không có xuất xứ tồn tại"),
+    PRODUCT_EXISTED("2000", "Sản phẩm đã tồn tại"),
+    PRODUCT_EMPTY("2000", "Không có sản phẩm tồn tại"),
+    BRAND_NOT_FOUND("2000", "Không tìm thấy thương hiệu"),
+    BRAND_EXISTED("2000", "Thương hiệu đã tồn tại"),
+    BRAND_EMPTY("2000", "Không có thương hiệu tồn tại"),
+    COLOR_NOT_FOUND("2000", "Không tìm thấy màu sắc"),
+    COLOR_EXISTED("2000", "Màu sắc đã tồn tại"),
+    COLOR_EMPTY("2000", "Không có màu sắc tồn tại"),
+    MADE_FROM_NOT_FOUND("2000", "Không tìm thấy xuất xứ"),
+    MADE_FROM_EXISTED("2000", "Xuất xứ đã tồn tại"),
+    MADE_FROM_EMPTY("2000", "Không có xuất xứ tồn tại"),
 
     //=========== SYSTEM ============
     BAD_SQL("1001", "Sai câu lệnh SQL"),
     INTERNAL_ERROR("5000", "Lỗi hệ thống"),
-    UNAUTHORIZED("5001", "Lỗi xác minh"),
-    BAD_CREDENTIALS("5000", "Sai thông tin đăng nhập")
-
+    UNAUTHORIZED("5000", "Lỗi xác minh"),
+    BAD_CREDENTIALS("5000", "Sai thông tin đăng nhập"),
+    INVALID_TOKEN("5000", "Token không hợp lệ"),
+    FORBIDDEN("5000", "Không được phép truy cập")
     ;
 
     private final String code;
