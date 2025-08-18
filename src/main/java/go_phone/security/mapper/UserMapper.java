@@ -12,8 +12,6 @@ public interface UserMapper extends BaseMapper<User> {
 
     User findByEmail(@Param("email") String email);
 
-    User findByUsernameOrEmail(@Param("ue") String usernameOrEmail);
-
     int existsByUsername(@Param("username") String username);
 
     int existsByEmail(@Param("email") String email);
