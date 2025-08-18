@@ -21,12 +21,15 @@ public class Application {
 				.filename(".env")
 				.load();
 
+		// Database
 		System.setProperty("DB_URL", dotenv.get("DB_URL"));
 		System.setProperty("DB_USERNAME", dotenv.get("DB_USERNAME"));
 		System.setProperty("DB_PASSWORD", dotenv.get("DB_PASSWORD"));
+
+		// JWT
 		System.setProperty("JWT_SECRET", dotenv.get("JWT_SECRET"));
-		System.setProperty("ACCESS-TOKEN-EXP", dotenv.get("ACCESS-TOKEN-EXP"));
-		System.setProperty("REFRESH-TOKEN-EXP", dotenv.get("REFRESH-TOKEN-EXP"));
+		System.setProperty("JWT_ISSUER", dotenv.get("JWT_ISSUER"));
+		System.setProperty("JWT_ACCESS_EXP_MINUTES", dotenv.get("JWT_ACCESS_EXP_MINUTES"));
 	}
 
 }
