@@ -35,7 +35,11 @@ public enum ErrorCode {
 
     //=========== SYSTEM ============
     BAD_SQL("1001", "Sai câu lệnh SQL"),
-    INTERNAL_ERROR("5000", "Lỗi hệ thống");
+    INTERNAL_ERROR("5000", "Lỗi hệ thống"),
+    UNAUTHORIZED("5001", "Lỗi xác minh"),
+    BAD_CREDENTIALS("5000", "Sai thông tin đăng nhập")
+
+    ;
 
     private final String code;
     private final String message;
