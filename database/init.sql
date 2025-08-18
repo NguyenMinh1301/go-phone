@@ -298,6 +298,16 @@ CREATE TABLE `cart_item` (
 ) ENGINE=InnoDB
   DEFAULT CHARSET=utf8mb4
   COLLATE=utf8mb4_unicode_ci;
+  
+CREATE TABLE revoked_token (
+  id BIGINT AUTO_INCREMENT PRIMARY KEY,
+  token VARCHAR(512) NOT NULL UNIQUE,
+  expires_at DATETIME NOT NULL,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  INDEX idx_expires_at (expires_at)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
 
   
   
