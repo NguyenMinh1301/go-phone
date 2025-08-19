@@ -55,7 +55,7 @@
         WHERE email = #{email} AND is_deleted = 0
     </select>
 
-    <insert id="insert" parameterType="go_phone.security.entity.User" useGeneratedKeys="true" keyProperty="userId">
+    <insert id="insert" parameterType="go_phone.security.entity.User" useGeneratedKeys="true" keyProperty="userId" keyColumn="user_id">
         INSERT INTO `user` (
         username
         , email
@@ -80,5 +80,13 @@
         , #{isActive}
         , #{isDeleted})
     </insert>
+
+    <update id="updatePasswordById">
+        UPDATE `user` SET password =
+        #{password}
+        , updated_at = NOW()
+        , updated_by = 'system'
+        WHERE user_id = #{userId}
+    </update>
 
 </mapper>

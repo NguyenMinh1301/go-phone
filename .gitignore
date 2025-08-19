@@ -34,3 +34,7 @@ build/
 
 ### .env ###
 .env
+
+### docker ###
+docker/mysql-data
+docker/redis-data

@@ -14,7 +14,10 @@ public class CustomUserDetails implements UserDetails {
     public CustomUserDetails(User user) { this.user = user; }
 
     @Override public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(); // Role sẽ có trong update...
+        if (user.getRoles() == null) return List.of();
+        return user.getRoles().stream()
+                .map(r -> new org.springframework.security.core.authority.SimpleGrantedAuthority("ROLE_" + r.getRoleCode()))
+                .toList();
     }
     @Override public String getPassword() { return user.getPassword(); }
     @Override public String getUsername() { return user.getUsername(); }
