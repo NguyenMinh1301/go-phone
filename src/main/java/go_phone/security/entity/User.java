@@ -1,8 +1,13 @@
 package go_phone.security.entity;
 
 import go_phone.common.model.BaseEntity;
-import lombok.*;
 import lombok.experimental.FieldDefaults;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.Builder;
+import lombok.AccessLevel;
 
 @Getter
 @Setter
@@ -19,6 +24,8 @@ public class User extends BaseEntity{
     String fullName;
     String phone;
     String address;
+
+    java.util.List<go_phone.security.entity.Role> roles;
 
     String createdBy;
 

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="go_phone.security.mapper.RoleMapper">
+
+    <resultMap id="RoleResult" type="go_phone.security.entity.Role">
+        <id     column="role_id"   property="roleId"/>
+        <result column="role_code" property="roleCode"/>
+        <result column="role_name" property="roleName"/>
+        <result column="priority"  property="priority"/>
+        <result column="is_active"  property="sActive"/>
+    </resultMap>
+
+    <select id="findByUserId" parameterType="int" resultMap="RoleResult">
+        SELECT r.*
+        FROM role r
+        JOIN user_role ur ON ur.role_id = r.role_id
+        WHERE ur.user_id = #{userId}
+    </select>
+
+    <select id="findByCode" parameterType="string" resultMap="RoleResult">
+        SELECT *
+        FROM role
+        WHERE role_code = #{roleCode}
+        LIMIT 1
+    </select>
+
+    <insert id="insertUserRole">
+        INSERT INTO user_role(user_id, role_id) VALUES(#{userId}, #{roleId})
+    </insert>
+
+    <delete id="deleteUserRoles" parameterType="int">
+        DELETE FROM user_role WHERE user_id = #{userId}
+    </delete>
+
+</mapper>

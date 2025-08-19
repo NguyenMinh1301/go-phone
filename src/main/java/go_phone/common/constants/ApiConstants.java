@@ -11,9 +11,10 @@ public class ApiConstants {
         public static final String BASE = VERSION_V1 + "/auth";
         public static final String REGISTER = "/register";
         public static final String LOGIN = "/login";
-        public static final String REFRESH_TOKEN = "/refresh";
         public static final String LOGOUT = "/logout";
         public static final String INTROSPECT = "/introspect";
+        public static final String FORGOT_REQUEST = "/forgot/request";
+        public static final String FORGOT_RESET = "/forgot/reset";
 
         private Auth() {
         }

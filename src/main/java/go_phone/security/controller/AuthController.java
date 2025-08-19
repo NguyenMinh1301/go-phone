@@ -4,20 +4,21 @@ import go_phone.common.constants.ApiConstants;
 import go_phone.common.response.ApiResponse;
 import go_phone.common.response.ResponseHandler;
 import go_phone.security.configuration.AuthService;
-import go_phone.security.dto.request.IntrospectRequest;
-import go_phone.security.dto.request.LoginRequest;
-import go_phone.security.dto.request.RegisterRequest;
+import go_phone.security.configuration.PasswordResetService;
+import go_phone.security.dto.request.*;
 import go_phone.security.dto.response.TokenResponse;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(ApiConstants.Auth.BASE)
+@RequiredArgsConstructor
 public class AuthController {
 
     private final AuthService authService;
-    public AuthController(AuthService authService) { this.authService = authService; }
+    private final PasswordResetService passwordResetService;
 
     // Register
     @PostMapping(ApiConstants.Auth.REGISTER)
@@ -57,6 +58,20 @@ public class AuthController {
         String token = extractToken(authorization, req);
         TokenResponse tr = authService.introspect(token);
         return ResponseHandler.success("Token hợp lệ", tr);
+    }
+
+    // Gửi OTP
+    @PostMapping(ApiConstants.Auth.FORGOT_REQUEST)
+    public ResponseEntity<ApiResponse<Object>> forgotRequest(@Valid @RequestBody ForgotPasswordRequest req) {
+        passwordResetService.sendOtp(req.getEmail());
+        return ResponseHandler.success("Nếu email tồn tại, OTP đã được gửi", null);
+    }
+
+    // Reset password
+    @PostMapping(ApiConstants.Auth.FORGOT_RESET)
+    public ResponseEntity<ApiResponse<Object>> forgotReset(@Valid @RequestBody ResetPasswordRequest req) {
+        passwordResetService.resetPassword(req.getEmail(), req.getOtp(), req.getNewPassword());
+        return ResponseHandler.success("Đổi mật khẩu thành công", null);
     }
 
     private String extractToken(String authorization, IntrospectRequest req) {

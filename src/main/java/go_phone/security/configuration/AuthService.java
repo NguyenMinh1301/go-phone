@@ -7,6 +7,7 @@ import go_phone.security.dto.request.LoginRequest;
 import go_phone.security.dto.request.RegisterRequest;
 import go_phone.security.dto.response.TokenResponse;
 import go_phone.security.mapper.RevokedTokenMapper;
+import go_phone.security.mapper.RoleMapper;
 import go_phone.security.mapper.UserMapper;
 import go_phone.security.entity.User;
 import org.springframework.security.authentication.*;
@@ -21,17 +22,19 @@ import java.time.LocalDateTime;
 public class AuthService {
 
     private final UserMapper userMapper;
+    private final RoleMapper roleMapper;
     private final RevokedTokenMapper revokedTokenMapper;
     private final PasswordEncoder encoder;
     private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;
 
-    public AuthService(UserMapper userMapper,
+    public AuthService(UserMapper userMapper, RoleMapper roleMapper,
                        RevokedTokenMapper revokedTokenMapper,
                        PasswordEncoder encoder,
                        AuthenticationManager authenticationManager,
                        JwtService jwtService) {
         this.userMapper = userMapper;
+        this.roleMapper = roleMapper;
         this.revokedTokenMapper = revokedTokenMapper;
         this.encoder = encoder;
         this.authenticationManager = authenticationManager;
@@ -58,7 +61,22 @@ public class AuthService {
                 .isDeleted(req.getIsDeleted() != null ? req.getIsDeleted() : 0)
                 .build();
 
-        return userMapper.insert(user);
+        int rows = userMapper.insert(user);
+
+        // Fallback an toàn nếu vì lý do nào đó key chưa set
+        if (user.getUserId() == null) {
+            var created = userMapper.findByUsername(user.getUsername());
+            if (created != null) user.setUserId(created.getUserId());
+        }
+
+        if (user.getUserId() == null) {
+            throw new AppException(ErrorCode.INTERNAL_ERROR); // không có id thì dừng
+        }
+
+        var role = roleMapper.findByCode("GO_STARTER");
+        roleMapper.insertUserRole(user.getUserId(), role.getRoleId());
+
+        return rows;
     }
 
     public TokenResponse login(LoginRequest req) {

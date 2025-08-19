@@ -28,6 +28,8 @@ public class SecurityConfig {
             "/api/v1/auth/logout",
             "/api/v1/auth/register",
             "/api/v1/auth/introspect",
+            "/api/v1/auth/forgot/request",
+            "/api/v1/auth/forgot/reset",
 
             // Monitoring
             "/actuator/**"

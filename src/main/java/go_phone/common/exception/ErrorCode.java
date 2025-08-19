@@ -17,6 +17,8 @@ public enum ErrorCode {
     ALREADY_EXIST("2000", "Đã tồn tại"),
     USERNAME_ALREADY_EXIST("2000", "Username đã tồn tại"),
     EMAIL_ALREADY_EXIST("2000", "email đã tồn tại"),
+    OTP_INVALID("2000", "OTP không hợp lệ"),
+    INVALID_TOKEN("2000", "Token không hợp lệ"),
     PRODUCT_NOT_FOUND("2000", "Không tìm thấy sản phẩm"),
     PRODUCT_EXISTED("2000", "Sản phẩm đã tồn tại"),
     PRODUCT_EMPTY("2000", "Không có sản phẩm tồn tại"),
@@ -35,7 +37,7 @@ public enum ErrorCode {
     INTERNAL_ERROR("5000", "Lỗi hệ thống"),
     UNAUTHORIZED("5000", "Lỗi xác minh"),
     BAD_CREDENTIALS("5000", "Sai thông tin đăng nhập"),
-    INVALID_TOKEN("5000", "Token không hợp lệ"),
+
     FORBIDDEN("5000", "Không được phép truy cập")
     ;
 
