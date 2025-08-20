@@ -1,0 +1,19 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="go_phone.feature.payment.mapper.PaymentEventMapper">
+
+    <insert id="insert" parameterType="go_phone.feature.payment.entity.PaymentEvent">
+        INSERT INTO payment_events (
+        gateway_payment_id
+        , payload_hash
+        , type
+        , received_at
+        ) VALUES(
+        #{gatewayPaymentId}
+        , #{payloadHash}
+        , #{type}
+        , NOW()
+        )
+    </insert>
+
+</mapper>

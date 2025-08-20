@@ -51,4 +51,26 @@ public class ApiConstants {
         }
     }
 
+    public static final class Cart {
+        public static final String BASE = VERSION_V1 + "/cart";
+        public static final String ITEMS = "/items";
+        public static final String GET = "/get";
+        public static final String CLEAR = "/clear";
+        private Cart() {}
+    }
+
+    public static final class Order {
+        public static final String BASE = VERSION_V1 + "/orders";
+        public static final String CREATE = "/create";
+        public static final String GET_BY_CODE = "/get/{orderCode}";
+        private Order() {}
+    }
+
+    public static final class Payment {
+        public static final String BASE = VERSION_V1 + "/payments/payos";
+        public static final String CREATE = "/create";
+        public static final String WEBHOOK = "/webhooks/payos"; // or use app.payment.webhook-path
+        private Payment() {}
+    }
+
 }
