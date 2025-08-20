@@ -154,72 +154,6 @@ CREATE TABLE `user_role` (
 ) ENGINE=InnoDB
   DEFAULT CHARSET=utf8mb4
   COLLATE=utf8mb4_unicode_ci;
-
-  -- Create table order
-CREATE TABLE `order` (
-    `order_id` INT AUTO_INCREMENT PRIMARY KEY,
-    `user_id` INT NOT NULL,
-    `total_amount` DECIMAL(15,2) NOT NULL,
-    `status` VARCHAR(50) DEFAULT 'PENDING', -- PENDING, CONFIRMED, SHIPPED, COMPLETED, CANCELED
-    `shipping_address` VARCHAR(255),
-
-    `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
-    `created_by` VARCHAR(100),
-    `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    `updated_by` VARCHAR(100),
-
-    `is_active` TINYINT DEFAULT 0,
-    `is_deleted` TINYINT DEFAULT 0,
-
-    FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`)
-) ENGINE=InnoDB
-  DEFAULT CHARSET=utf8mb4
-  COLLATE=utf8mb4_unicode_ci;
-
-  -- Create table order_detail
-CREATE TABLE `order_detail` (
-    `order_id` INT NOT NULL,
-    `product_id` INT NOT NULL,
-    `quantity` INT NOT NULL,
-    `price` DECIMAL(15,2) NOT NULL,
-    PRIMARY KEY (`order_id`, `product_id`),
-
-    FOREIGN KEY (`order_id`) REFERENCES `order`(`order_id`) ON DELETE CASCADE,
-    FOREIGN KEY (`product_id`) REFERENCES `product`(`product_id`)
-) ENGINE=InnoDB
-  DEFAULT CHARSET=utf8mb4
-  COLLATE=utf8mb4_unicode_ci;
-
-  -- Create table order cart
-CREATE TABLE `cart` (
-    `cart_id` INT AUTO_INCREMENT PRIMARY KEY,
-    `user_id` INT NOT NULL,
-
-    `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
-    `created_by` VARCHAR(100),
-    `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    `updated_by` VARCHAR(100),
-
-    `is_active` TINYINT DEFAULT 0,
-    `is_deleted` TINYINT DEFAULT 0,
-
-    FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`) ON DELETE CASCADE
-) ENGINE=InnoDB
-  DEFAULT CHARSET=utf8mb4
-  COLLATE=utf8mb4_unicode_ci;
-
-  -- Create table order cart_item
-CREATE TABLE `cart_item` (
-    `cart_id` INT NOT NULL,
-    `product_id` INT NOT NULL,
-    `quantity` INT NOT NULL,
-    PRIMARY KEY (`cart_id`, `product_id`),
-
-    FOREIGN KEY (`cart_id`) REFERENCES `cart`(`cart_id`) ON DELETE CASCADE,
-    FOREIGN KEY (`product_id`) REFERENCES `product`(`product_id`)
-) ENGINE=InnoDB
-  DEFAULT CHARSET=utf8mb4
-  COLLATE=utf8mb4_unicode_ci;
   
 CREATE TABLE `revoked_token` (
   `id` BIGINT AUTO_INCREMENT PRIMARY KEY,
@@ -231,3 +165,120 @@ CREATE TABLE `revoked_token` (
 ) ENGINE=InnoDB 
   DEFAULT CHARSET=utf8mb4 
   COLLATE=utf8mb4_unicode_ci;
+  
+-- Create table carts
+CREATE TABLE carts (
+  cart_id        BIGINT PRIMARY KEY AUTO_INCREMENT,
+  user_id        BIGINT NULL,
+  guest_token    VARCHAR(64) NULL,
+  status         VARCHAR(24) NOT NULL DEFAULT 'ACTIVE', -- ACTIVE / CHECKED_OUT / EXPIRED
+  total_amount   BIGINT NOT NULL DEFAULT 0,
+  discount_amount BIGINT NOT NULL DEFAULT 0,
+  shipping_fee   BIGINT NOT NULL DEFAULT 0,
+  tax_amount     BIGINT NOT NULL DEFAULT 0,
+  grand_total    BIGINT NOT NULL DEFAULT 0,
+  created_at     TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  created_by     VARCHAR(64),
+  updated_at     TIMESTAMP NULL,
+  updated_by     VARCHAR(64),
+  is_deleted     TINYINT(1) NOT NULL DEFAULT 0,
+  KEY idx_carts_user (user_id),
+  KEY idx_carts_guest (guest_token)
+);
+
+-- Create table cart_items
+CREATE TABLE cart_items (
+  cart_item_id   BIGINT PRIMARY KEY AUTO_INCREMENT,
+  cart_id        BIGINT NOT NULL,
+  product_id     BIGINT NOT NULL,
+  sku_id         BIGINT NULL,
+  price_unit     BIGINT NOT NULL,
+  qty            INT NOT NULL,
+  subtotal       BIGINT NOT NULL,
+  snapshot_json  LONGTEXT NULL,
+  is_deleted     TINYINT(1) NOT NULL DEFAULT 0,
+  FOREIGN KEY (cart_id) REFERENCES carts(cart_id) ON DELETE CASCADE,
+  KEY idx_cart_items_cart (cart_id)
+);
+
+-- Create table orders
+CREATE TABLE orders (
+  order_id       BIGINT PRIMARY KEY AUTO_INCREMENT,
+  order_code     BIGINT NOT NULL UNIQUE,
+  user_id        BIGINT NULL,
+  status         VARCHAR(24) NOT NULL,               -- PENDING_PAYMENT / PAID / CANCELLED / EXPIRED / REFUNDED
+  amount_items   BIGINT NOT NULL,
+  discount_amount BIGINT NOT NULL DEFAULT 0,
+  shipping_fee   BIGINT NOT NULL DEFAULT 0,
+  tax_amount     BIGINT NOT NULL DEFAULT 0,
+  grand_total    BIGINT NOT NULL,
+  currency       VARCHAR(3) NOT NULL DEFAULT 'VND',
+  customer_name  VARCHAR(120),
+  customer_phone VARCHAR(32),
+  customer_email VARCHAR(120),
+  shipping_address_json LONGTEXT NULL,
+  pay_gateway    VARCHAR(32) NOT NULL DEFAULT 'PAYOS',
+  pay_ref        VARCHAR(64) NULL,                   -- paymentLinkId/payOS id
+  created_at     TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  created_by     VARCHAR(64),
+  updated_at     TIMESTAMP NULL,
+  updated_by     VARCHAR(64),
+  is_deleted     TINYINT(1) NOT NULL DEFAULT 0,
+  KEY idx_orders_code (order_code),
+  KEY idx_orders_user (user_id)
+);
+
+-- Create table order_items
+CREATE TABLE order_items (
+  order_item_id  BIGINT PRIMARY KEY AUTO_INCREMENT,
+  order_id       BIGINT NOT NULL,
+  product_id     BIGINT NOT NULL,
+  sku_id         BIGINT NULL,
+  name_snapshot  VARCHAR(255),
+  price_unit     BIGINT NOT NULL,
+  qty            INT NOT NULL,
+  subtotal       BIGINT NOT NULL,
+  vat_rate       DECIMAL(5,2) DEFAULT 0,
+  is_deleted     TINYINT(1) NOT NULL DEFAULT 0,
+  FOREIGN KEY (order_id) REFERENCES orders(order_id) ON DELETE CASCADE,
+  KEY idx_order_items_order (order_id)
+);
+
+-- Create table inventory_reservations
+CREATE TABLE inventory_reservations (
+  resv_id     BIGINT PRIMARY KEY AUTO_INCREMENT,
+  order_id    BIGINT NOT NULL,
+  sku_id      BIGINT NOT NULL,
+  qty         INT NOT NULL,
+  expires_at  TIMESTAMP NOT NULL,
+  status      VARCHAR(16) NOT NULL, -- HELD / RELEASED / APPLIED
+  KEY idx_resv_order (order_id),
+  KEY idx_resv_exp (expires_at)
+);
+
+-- Create table payment_attempts
+CREATE TABLE payment_attempts (
+  attempt_id          BIGINT PRIMARY KEY AUTO_INCREMENT,
+  order_id            BIGINT NOT NULL,
+  gateway             VARCHAR(32) NOT NULL DEFAULT 'PAYOS',
+  gateway_payment_id  VARCHAR(64),
+  checkout_url        VARCHAR(512),
+  status              VARCHAR(24) NOT NULL,           -- INITIATED / PENDING / SUCCEEDED / FAILED / CANCELLED
+  amount              BIGINT NOT NULL,
+  currency            VARCHAR(3) NOT NULL DEFAULT 'VND',
+  idempotency_key     VARCHAR(64),
+  raw_payload         LONGTEXT NULL,
+  created_at          TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at          TIMESTAMP NULL,
+  UNIQUE KEY uk_attempt_order_gateway (order_id, gateway)
+);
+
+-- Create table payment_events
+CREATE TABLE payment_events (
+  event_id            BIGINT PRIMARY KEY AUTO_INCREMENT,
+  gateway_payment_id  VARCHAR(64) NOT NULL,
+  payload_hash        CHAR(64) NOT NULL,
+  type                VARCHAR(64),
+  received_at         TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  UNIQUE KEY uk_evt_unique (gateway_payment_id, payload_hash)
+);
