@@ -59,26 +59,7 @@ public class SecurityConfig {
                         .accessDeniedHandler(accessDeniedHandler)
                 )
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
-
-        http.cors(Customizer.withDefaults());
-
         return http.build();
-    }
-
-    @Bean
-    CorsConfigurationSource corsConfigurationSource() {
-        var cfg = new CorsConfiguration();
-
-        cfg.setAllowedOrigins(List.of("http://localhost:3000", "https://frontend.app"));
-        cfg.setAllowedMethods(List.of("GET","POST","PUT","DELETE","PATCH","OPTIONS"));
-        cfg.setAllowedHeaders(List.of("*"));
-        cfg.setAllowCredentials(true);
-
-        var source = new UrlBasedCorsConfigurationSource();
-
-        source.registerCorsConfiguration("/**", cfg);
-
-        return source;
     }
 
     @Bean
