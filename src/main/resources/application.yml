@@ -46,11 +46,19 @@ app:
     ttl-seconds: ${OTP_TTL_SECONDS:300}
     resend-window-seconds: ${OTP_RESEND_WINDOW_SECONDS:60}
     max-attempts: ${OTP_MAX_ATTEMPTS:5}
+  payment:
+    return-path: /payos/return
+    webhook-path: /api/webhooks/payos
 
 jwt:
   secret: ${JWT_SECRET}
   issuer: ${JWT_ISSUER}
   access-exp-minutes: ${JWT_ACCESS_EXP_MINUTES}
+
+payos:
+  client-id: ${PAYOS_CLIENT_ID}
+  api-key: ${PAYOS_API_KEY}
+  checksum-key: ${PAYOS_CHECKSUM_KEY}
 
 management:
   endpoints:
