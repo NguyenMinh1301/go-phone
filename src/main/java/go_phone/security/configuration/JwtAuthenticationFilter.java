@@ -5,6 +5,7 @@ import go_phone.common.response.ResponseWriter;
 import go_phone.security.mapper.RevokedTokenMapper;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
+import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.*;
@@ -14,25 +15,21 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 
 @Component
+@AllArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private final JwtService jwtService;
     private final UserDetailsService userDetailsService;
     private final RevokedTokenMapper revokedTokenMapper;
 
-    public JwtAuthenticationFilter(JwtService jwtService, UserDetailsService uds, RevokedTokenMapper revokedTokenMapper) {
-        this.jwtService = jwtService;
-        this.userDetailsService = uds;
-        this.revokedTokenMapper = revokedTokenMapper;
-    }
-
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
 
         final String authHeader = request.getHeader("Authorization");
         final String token;
+
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-            chain.doFilter(request, response);
+            filterChain.doFilter(request, response);
             return;
         }
         token = authHeader.substring(7);
@@ -50,7 +47,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                     new UsernamePasswordAuthenticationToken(ud, null, ud.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authToken);
         }
-        chain.doFilter(request, response);
+        filterChain.doFilter(request, response);
     }
 
     @Override

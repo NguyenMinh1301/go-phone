@@ -10,6 +10,7 @@ import go_phone.security.mapper.RevokedTokenMapper;
 import go_phone.security.mapper.RoleMapper;
 import go_phone.security.mapper.UserMapper;
 import go_phone.security.entity.User;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -19,6 +20,7 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 
 @Service
+@RequiredArgsConstructor
 public class AuthService {
 
     private final UserMapper userMapper;
@@ -28,20 +30,8 @@ public class AuthService {
     private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;
 
-    public AuthService(UserMapper userMapper, RoleMapper roleMapper,
-                       RevokedTokenMapper revokedTokenMapper,
-                       PasswordEncoder encoder,
-                       AuthenticationManager authenticationManager,
-                       JwtService jwtService) {
-        this.userMapper = userMapper;
-        this.roleMapper = roleMapper;
-        this.revokedTokenMapper = revokedTokenMapper;
-        this.encoder = encoder;
-        this.authenticationManager = authenticationManager;
-        this.jwtService = jwtService;
-    }
-
     public int register(RegisterRequest req) {
+
         if (userMapper.existsByUsername(req.getUsername()) > 0) {
             throw new AppException(ErrorCode.USERNAME_ALREADY_EXIST);
         }
@@ -63,14 +53,13 @@ public class AuthService {
 
         int rows = userMapper.insert(user);
 
-        // Fallback an toàn nếu vì lý do nào đó key chưa set
         if (user.getUserId() == null) {
             var created = userMapper.findByUsername(user.getUsername());
             if (created != null) user.setUserId(created.getUserId());
         }
 
         if (user.getUserId() == null) {
-            throw new AppException(ErrorCode.INTERNAL_ERROR); // không có id thì dừng
+            throw new AppException(ErrorCode.INTERNAL_ERROR);
         }
 
         var role = roleMapper.findByCode("GO_STARTER");
@@ -86,40 +75,48 @@ public class AuthService {
         // nếu sai sẽ ném AuthenticationException và GlobalExceptionHandler đã map BAD_CREDENTIALS
 
         String token = jwtService.generateToken(req.getUsername());
-        Instant iat = jwtService.getIssuedAt(token);
-        Instant exp = jwtService.getExpiration(token);
+        Instant issueAt = jwtService.getIssuedAt(token);
+        Instant expiration = jwtService.getExpiration(token);
 
         return TokenResponse.builder()
                 .token(token)
-                .issuedAt(iat)
-                .expiresAt(exp)
+                .issuedAt(issueAt)
+                .expiresAt(expiration)
                 .issuer(jwtService.getIssuer())
                 .username(req.getUsername())
                 .build();
     }
 
     public void logout(String token) {
+
         if (!jwtService.isValid(token)) {
             throw new AppException(ErrorCode.INVALID_TOKEN);
         }
+
         if (revokedTokenMapper.isRevoked(token) > 0) {
             // đã logout rồi coi như thành công idempotent
             return;
         }
+
         LocalDateTime exp = LocalDateTime.ofInstant(jwtService.getExpiration(token), java.time.ZoneId.systemDefault());
         revokedTokenMapper.insert(token, exp);
         // dọn rác token quá hạn
         revokedTokenMapper.deleteExpired();
+
     }
 
     public TokenResponse introspect(String token) {
+
         if (token == null || token.isBlank()) {
             throw new AppException(ErrorCode.INVALID_TOKEN);
         }
+
         if (!jwtService.isValid(token) || revokedTokenMapper.isRevoked(token) > 0) {
             throw new AppException(ErrorCode.INVALID_TOKEN);
         }
+
         String username = jwtService.extractUsername(token).orElseThrow(() -> new AppException(ErrorCode.UNAUTHORIZED));
+
         return TokenResponse.builder()
                 .token(token)
                 .issuedAt(jwtService.getIssuedAt(token))
@@ -128,4 +125,5 @@ public class AuthService {
                 .username(username)
                 .build();
     }
+
 }
