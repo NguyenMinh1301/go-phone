@@ -1,7 +1,5 @@
 package go_phone.feature.ai.service.Impl;
 
-import go_phone.common.exception.AppException;
-import go_phone.common.exception.ErrorCode;
 import go_phone.common.util.AiHelper;
 import go_phone.common.util.SystemPrompt;
 import go_phone.feature.ai.dto.request.ChatRequest;
@@ -10,10 +8,6 @@ import go_phone.feature.ai.dto.response.ChatResponse;
 import go_phone.feature.ai.dto.response.HelpResponse;
 import go_phone.feature.ai.service.ChatService;
 import org.springframework.ai.chat.client.ChatClient;
-import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
-import org.springframework.ai.chat.memory.ChatMemory;
-import org.springframework.ai.chat.memory.MessageWindowChatMemory;
-import org.springframework.ai.chat.memory.repository.jdbc.JdbcChatMemoryRepository;
 import org.springframework.ai.chat.messages.UserMessage;
 import org.springframework.ai.chat.prompt.ChatOptions;
 import org.springframework.ai.chat.prompt.Prompt;
