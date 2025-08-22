@@ -33,6 +33,15 @@ spring:
       mail.smtp.connectiontimeout: 5000
       mail.smtp.timeout: 5000
       mail.smtp.writetimeout: 5000
+  ai:
+#    Có thể thay bằng OpenAI
+    openai:
+      api-key: ${GENMINI_KEY}
+      chat:
+        base-url: ${GEMINI_URL}
+        completions-path: ${GEMINI_CHAT_COMPLETIONS}
+        options:
+          model: ${MODEL}
 
 mail:
   from:
