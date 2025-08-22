@@ -9,11 +9,10 @@ spring:
   config:
     import: optional:file:.env[.properties]
   datasource:
-    mysql:
-      url: ${MYSQL_URL}
-      driverClassName: com.mysql.cj.jdbc.Driver
-      username: ${MYSQL_USERNAME}
-      password: ${MYSQL_PASSWORD}
+    url: ${MYSQL_URL}
+    username: ${MYSQL_USERNAME}
+    password: ${MYSQL_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
   data:
     redis:
       host: ${REDIS_HOST}
