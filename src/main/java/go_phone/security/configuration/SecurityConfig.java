@@ -41,6 +41,8 @@ public class SecurityConfig {
             "/api/webhooks/payos",
             "/payos/return",
 
+            //Chat
+            "api/v1/chat",
             // Monitoring
             "/actuator/**"
     };
