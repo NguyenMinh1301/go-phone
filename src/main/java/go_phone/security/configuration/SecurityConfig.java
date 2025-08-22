@@ -42,7 +42,10 @@ public class SecurityConfig {
             "/payos/return",
 
             //Chat
-            "api/v1/chat",
+            "/api/v1/ai/chat",
+            "/api/v1/ai/chat-with-image",
+            "/api/v1/ai/help",
+
             // Monitoring
             "/actuator/**"
     };

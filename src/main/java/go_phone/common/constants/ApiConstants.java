@@ -20,11 +20,12 @@ public class ApiConstants {
         }
     }
 
-    public static final class Chat {
-        public static final String BASE = VERSION_V1 + "/chat";
-        public static final String MESSAGE = "/message";
-
-        private Chat() {
+    public static final class Ai {
+        public static final String BASE = VERSION_V1 + "/ai";
+        public static final String CHAT = "/chat";
+        public static final String CHAT_WITH_IMAGE = "/chat-with-image";
+        public static final String HELP = "/help";
+        private Ai() {
         }
     }
 
