@@ -89,6 +89,13 @@
             <scope>runtime</scope>
         </dependency>
 
+        <!-- Redis (Lettuce) -->
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+
         <!-- Lombok -->
 
         <dependency>
@@ -141,13 +148,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-mail</artifactId>
-        </dependency>
-
-        <!-- Redis (Lettuce) -->
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
 
         <!-- PayOS -->

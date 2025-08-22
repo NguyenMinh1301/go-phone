@@ -10,6 +10,10 @@ import go_phone.feature.ai.dto.response.ChatResponse;
 import go_phone.feature.ai.dto.response.HelpResponse;
 import go_phone.feature.ai.service.ChatService;
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
+import org.springframework.ai.chat.memory.ChatMemory;
+import org.springframework.ai.chat.memory.MessageWindowChatMemory;
+import org.springframework.ai.chat.memory.repository.jdbc.JdbcChatMemoryRepository;
 import org.springframework.ai.chat.messages.UserMessage;
 import org.springframework.ai.chat.prompt.ChatOptions;
 import org.springframework.ai.chat.prompt.Prompt;
@@ -25,15 +29,13 @@ import java.util.List;
 public class ChatServiceImpl implements ChatService {
 
     private final ChatClient chatClient;
-    private final AiHelper buildPrompt;
 
-    public ChatServiceImpl(ChatClient.Builder builder, AiHelper buildPrompt) {
+    public ChatServiceImpl(ChatClient.Builder builder) {
         chatClient = builder.build();
-        this.buildPrompt = buildPrompt;
     }
 
     @Override
-    public List<ChatResponse> chat(ChatRequest request) {
+    public String chat(ChatRequest request) {
 
         UserMessage userMessage = new UserMessage(request.message());
 
@@ -42,8 +44,8 @@ public class ChatServiceImpl implements ChatService {
         return chatClient
                 .prompt(prompt)
                 .call()
-                .entity(new ParameterizedTypeReference<List<ChatResponse>>() {
-                });
+                .content();
+
     }
 
     @Override
@@ -67,6 +69,7 @@ public class ChatServiceImpl implements ChatService {
                 .call()
                 .entity(new ParameterizedTypeReference<List<ChatResponse>>() {
                 });
+
     }
 
     @Override

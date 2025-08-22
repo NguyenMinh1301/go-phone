@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface ChatService {
 
-    List<ChatResponse> chat(ChatRequest request);
+    String chat(ChatRequest request);
 
     List<ChatResponse> chatWithImage(MultipartFile file, String message);
 

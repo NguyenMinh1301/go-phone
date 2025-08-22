@@ -9,19 +9,20 @@ spring:
   config:
     import: optional:file:.env[.properties]
   datasource:
-    url: ${DB_URL}
-    driverClassName: com.mysql.cj.jdbc.Driver
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
+    mysql:
+      url: ${MYSQL_URL}
+      driverClassName: com.mysql.cj.jdbc.Driver
+      username: ${MYSQL_USERNAME}
+      password: ${MYSQL_PASSWORD}
   data:
     redis:
-      host: ${REDIS_HOST:localhost}
-      port: ${REDIS_PORT:6379}
+      host: ${REDIS_HOST}
+      port: ${REDIS_PORT}
       password: ${REDIS_PASSWORD:}
       timeout: 2000
   mail:
-    host: ${SMTP_HOST:smtp.gmail.com}
-    port: ${SMTP_PORT:587}
+    host: ${SMTP_HOST}
+    port: ${SMTP_PORT}
     username: ${SMTP_USERNAME:}
     password: ${SMTP_PASSWORD:}
     protocol: smtp
@@ -34,7 +35,6 @@ spring:
       mail.smtp.timeout: 5000
       mail.smtp.writetimeout: 5000
   ai:
-#    Có thể thay bằng OpenAI
     openai:
       api-key: ${GENMINI_KEY}
       chat:

@@ -21,7 +21,7 @@ public class ChatController {
     private final ChatServiceImpl chatService;
 
     @PostMapping(ApiConstants.Ai.CHAT)
-    public ResponseEntity<ApiResponse<List>> chat(@RequestBody ChatRequest chatRequest) {
+    public ResponseEntity<ApiResponse<String>> chat(@RequestBody ChatRequest chatRequest) {
         return ResponseHandler.success(chatService.chat(chatRequest));
     }
 
