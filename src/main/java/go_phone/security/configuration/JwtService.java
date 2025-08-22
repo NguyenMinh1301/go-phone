@@ -18,9 +18,9 @@ public class JwtService {
     private final long expMinutes;
 
     public JwtService(
-            @Value("${jwt.secret}") String secret,
-            @Value("${jwt.issuer}") String issuer,
-            @Value("${jwt.access-exp-minutes}") long expMinutes
+            @Value("${jwt.secret}") String secret
+            , @Value("${jwt.issuer}") String issuer
+            , @Value("${jwt.access-exp-minutes}") long expMinutes
     ) {
         this.key = Keys.hmacShaKeyFor(secret.getBytes());
         this.issuer = issuer;
