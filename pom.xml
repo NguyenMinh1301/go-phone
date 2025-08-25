@@ -246,8 +246,11 @@
                             <tabs>true</tabs>
                             <spacesPerTab>4</spacesPerTab>
                         </indent>
-                        <!-- Google format-->
-                        <googleJavaFormat/>
+                        <!-- Google format -->
+                        <googleJavaFormat>
+                            <!-- AOSP type 4 space cho 1 tab -->
+                            <style>AOSP</style>
+                        </googleJavaFormat>
                         <importOrder>
                             <!-- Chỉ định thứ tự hoặc tập tin, nhưng không phải cả hai -->
                             <order>java,jakarta,org,com,com.diffplug,</order>
