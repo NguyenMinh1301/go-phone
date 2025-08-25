@@ -1,3 +1,3 @@
 package go_phone.feature.ai.dto.request;
 
-public record ChatRequest(String message) { }
+public record ChatRequest(String message) {}

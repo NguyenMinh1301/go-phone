@@ -1,13 +1,13 @@
 package go_phone.security.entity;
 
 import go_phone.common.model.BaseEntity;
-import lombok.experimental.FieldDefaults;
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.Builder;
-import lombok.AccessLevel;
+import lombok.experimental.FieldDefaults;
 
 @Getter
 @Setter
@@ -15,7 +15,7 @@ import lombok.AccessLevel;
 @NoArgsConstructor
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class User extends BaseEntity{
+public class User extends BaseEntity {
 
     Integer userId;
     String username;
@@ -31,5 +31,4 @@ public class User extends BaseEntity{
 
     Integer isActive;
     Integer isDeleted;
-
 }

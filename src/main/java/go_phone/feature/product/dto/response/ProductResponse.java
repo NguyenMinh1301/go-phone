@@ -51,5 +51,4 @@ public class ProductResponse {
     String updatedBy;
     Integer isActive;
     Integer isDeleted;
-
 }

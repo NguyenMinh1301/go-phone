@@ -1,5 +1,10 @@
 package go_phone.feature.category.controller;
 
+import java.util.List;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
 import go_phone.common.constants.ApiConstants;
 import go_phone.common.response.ApiResponse;
 import go_phone.common.response.PageResponse;
@@ -9,10 +14,6 @@ import go_phone.feature.category.dto.request.MadeFromRequest;
 import go_phone.feature.category.dto.response.MadeFromResponse;
 import go_phone.feature.category.service.MadeFromService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -30,16 +31,18 @@ public class MadeFromController {
 
     // Lấy toàn bộ made_from Pageable
     @GetMapping(ApiConstants.Category.MADE_FROM + ApiConstants.Category.GET_ALL_PAGEABLE)
-    public ResponseEntity<ApiResponse<PageResponse<MadeFromResponse>>> getAllPageable(@RequestParam(defaultValue = "0") int page,
-                                                                                      @RequestParam(defaultValue = "10") int size) {
+    public ResponseEntity<ApiResponse<PageResponse<MadeFromResponse>>> getAllPageable(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
         return ResponseHandler.success(madeFromService.findAllPageable(page, size));
     }
 
     // Tìm kiếm made_from Pageable
     @GetMapping(ApiConstants.Category.MADE_FROM + ApiConstants.Category.SEARCH_PAGEABLE)
-    public ResponseEntity<ApiResponse<PageResponse<MadeFromResponse>>> searchPageable(@RequestParam(required = false) String keyword,
-                                                                                      @RequestParam(defaultValue = "0") int page,
-                                                                                      @RequestParam(defaultValue = "10") int size) {
+    public ResponseEntity<ApiResponse<PageResponse<MadeFromResponse>>> searchPageable(
+            @RequestParam(required = false) String keyword,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
         return ResponseHandler.success(madeFromService.searchPageable(keyword, page, size));
     }
 
@@ -57,8 +60,8 @@ public class MadeFromController {
 
     // Cập nhật made_from
     @PutMapping(ApiConstants.Category.MADE_FROM + ApiConstants.Category.UPDATE)
-    public ResponseEntity<ApiResponse<Integer>> update(@PathVariable("id") Integer id,
-                                                       @RequestBody MadeFromRequest madeFromRequest) {
+    public ResponseEntity<ApiResponse<Integer>> update(
+            @PathVariable("id") Integer id, @RequestBody MadeFromRequest madeFromRequest) {
         return ResponseHandler.success(madeFromService.update(id, madeFromRequest));
     }
 
@@ -67,5 +70,4 @@ public class MadeFromController {
     public ResponseEntity<ApiResponse<Integer>> delete(@PathVariable("id") Integer id) {
         return ResponseHandler.success(madeFromService.delete(id));
     }
-
 }

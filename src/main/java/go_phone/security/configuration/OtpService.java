@@ -1,11 +1,11 @@
 package go_phone.security.configuration;
 
+import java.security.SecureRandom;
+import java.time.Duration;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
-
-import java.security.SecureRandom;
-import java.time.Duration;
 
 @Service
 public class OtpService {
@@ -20,17 +20,24 @@ public class OtpService {
             StringRedisTemplate redis,
             @Value("${app.otp.ttl-seconds:300}") int ttlSeconds,
             @Value("${app.otp.resend-window-seconds:60}") int resendWindowSeconds,
-            @Value("${app.otp.max-attempts:5}") int maxAttempts
-    ) {
+            @Value("${app.otp.max-attempts:5}") int maxAttempts) {
         this.redis = redis;
         this.ttlSeconds = ttlSeconds;
         this.resendWindowSeconds = resendWindowSeconds;
         this.maxAttempts = maxAttempts;
     }
 
-    private String keyOtp(String email) { return "otp:fp:" + email.toLowerCase(); }
-    private String keyCooldown(String email) { return "otp:fp:cool:" + email.toLowerCase(); }
-    private String keyAttempts(String email) { return "otp:fp:attempt:" + email.toLowerCase(); }
+    private String keyOtp(String email) {
+        return "otp:fp:" + email.toLowerCase();
+    }
+
+    private String keyCooldown(String email) {
+        return "otp:fp:cool:" + email.toLowerCase();
+    }
+
+    private String keyAttempts(String email) {
+        return "otp:fp:attempt:" + email.toLowerCase();
+    }
 
     public String generateAndStore(String email) {
         // kiểm tra cooldown resend

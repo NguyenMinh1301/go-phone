@@ -1,5 +1,10 @@
 package go_phone.feature.product.controller;
 
+import java.util.List;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
 import go_phone.common.constants.ApiConstants;
 import go_phone.common.response.ApiResponse;
 import go_phone.common.response.PageResponse;
@@ -9,10 +14,6 @@ import go_phone.feature.product.dto.request.ProductRequest;
 import go_phone.feature.product.dto.response.ProductResponse;
 import go_phone.feature.product.service.ProductService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -30,16 +31,18 @@ public class ProductController {
 
     // Lấy toàn bộ sản phẩm Pageable
     @GetMapping(ApiConstants.Product.GET_ALL_PAGEABLE)
-    public ResponseEntity<ApiResponse<PageResponse<ProductResponse>>> getAllPageable(@RequestParam(defaultValue = "0") int page,
-                                                                                     @RequestParam(defaultValue = "10") int size) {
+    public ResponseEntity<ApiResponse<PageResponse<ProductResponse>>> getAllPageable(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
         return ResponseHandler.success(productService.findAllPageable(page, size));
     }
 
     // Tìm kiếm sản phẩm Pageable
     @GetMapping(ApiConstants.Product.SEARCH_PAGEABLE)
-    public ResponseEntity<ApiResponse<PageResponse<ProductResponse>>> searchPageable(@RequestParam(required = false) String keyword,
-                                                                                     @RequestParam(defaultValue = "0") int page,
-                                                                                     @RequestParam(defaultValue = "10") int size) {
+    public ResponseEntity<ApiResponse<PageResponse<ProductResponse>>> searchPageable(
+            @RequestParam(required = false) String keyword,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
         return ResponseHandler.success(productService.searchPageable(keyword, page, size));
     }
 
@@ -57,8 +60,8 @@ public class ProductController {
 
     // Cập nhật sản phẩm
     @PutMapping(ApiConstants.Product.UPDATE)
-    public ResponseEntity<ApiResponse<Integer>> update(@PathVariable("id") Integer id,
-                                                       @RequestBody ProductRequest productRequest) {
+    public ResponseEntity<ApiResponse<Integer>> update(
+            @PathVariable("id") Integer id, @RequestBody ProductRequest productRequest) {
         return ResponseHandler.success(productService.update(id, productRequest));
     }
 
@@ -67,5 +70,4 @@ public class ProductController {
     public ResponseEntity<ApiResponse<Integer>> delete(@PathVariable("id") Integer id) {
         return ResponseHandler.success(productService.delete(id));
     }
-
 }

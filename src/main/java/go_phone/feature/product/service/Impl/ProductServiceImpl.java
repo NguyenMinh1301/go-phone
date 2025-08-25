@@ -1,5 +1,10 @@
 package go_phone.feature.product.service.Impl;
 
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import go_phone.common.exception.AppException;
 import go_phone.common.exception.ErrorCode;
 import go_phone.common.handler.CalculateOffset;
@@ -11,10 +16,6 @@ import go_phone.feature.product.entity.Product;
 import go_phone.feature.product.mapper.ProductMapper;
 import go_phone.feature.product.service.ProductService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -26,7 +27,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public int create(ProductRequest dto) {
-        if(productMapper.existsByName(dto.getProductName())) {
+        if (productMapper.existsByName(dto.getProductName())) {
             throw new AppException(ErrorCode.PRODUCT_EXISTED);
         }
         Product product = productConverter.toEntity(dto);
@@ -36,7 +37,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public int update(Integer id, ProductRequest dto) {
         Product product = productMapper.findById(id);
-        if(product == null) {
+        if (product == null) {
             throw new AppException(ErrorCode.PRODUCT_NOT_FOUND);
         }
         productConverter.updateEntity(dto, product);
@@ -46,7 +47,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductResponse findById(Integer id) {
         Product product = productMapper.findById(id);
-        if(product != null) {
+        if (product != null) {
             return productConverter.toResponse(product);
         } else {
             throw new AppException(ErrorCode.PRODUCT_NOT_FOUND);
@@ -56,7 +57,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<ProductResponse> findAll() {
         List<Product> products = productMapper.findAll();
-        if(products == null || products.isEmpty()) {
+        if (products == null || products.isEmpty()) {
             throw new AppException(ErrorCode.PRODUCT_EMPTY);
         }
         return productConverter.toResponseList(products);
@@ -66,7 +67,7 @@ public class ProductServiceImpl implements ProductService {
     @Transactional
     public int delete(Integer id) {
         Product product = productMapper.findById(id);
-        if(product == null) {
+        if (product == null) {
             throw new AppException(ErrorCode.PRODUCT_NOT_FOUND);
         }
         return productMapper.softDeleteById(id);

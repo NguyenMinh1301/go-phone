@@ -1,5 +1,10 @@
 package go_phone.feature.category.controller;
 
+import java.util.List;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
 import go_phone.common.constants.ApiConstants;
 import go_phone.common.response.ApiResponse;
 import go_phone.common.response.PageResponse;
@@ -9,10 +14,6 @@ import go_phone.feature.category.dto.request.ColorRequest;
 import go_phone.feature.category.dto.response.ColorResponse;
 import go_phone.feature.category.service.ColorService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -30,16 +31,18 @@ public class ColorController {
 
     // Lấy toàn bộ color Pageable
     @GetMapping(ApiConstants.Category.COLOR + ApiConstants.Category.GET_ALL_PAGEABLE)
-    public ResponseEntity<ApiResponse<PageResponse<ColorResponse>>> getAllPageable(@RequestParam(defaultValue = "0") int page,
-                                                                                   @RequestParam(defaultValue = "10") int size) {
+    public ResponseEntity<ApiResponse<PageResponse<ColorResponse>>> getAllPageable(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
         return ResponseHandler.success(colorService.findAllPageable(page, size));
     }
 
     // Tìm kiếm color Pageable
     @GetMapping(ApiConstants.Category.COLOR + ApiConstants.Category.SEARCH_PAGEABLE)
-    public ResponseEntity<ApiResponse<PageResponse<ColorResponse>>> searchPageable(@RequestParam(required = false) String keyword,
-                                                                                   @RequestParam(defaultValue = "0") int page,
-                                                                                   @RequestParam(defaultValue = "10") int size) {
+    public ResponseEntity<ApiResponse<PageResponse<ColorResponse>>> searchPageable(
+            @RequestParam(required = false) String keyword,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
         return ResponseHandler.success(colorService.searchPageable(keyword, page, size));
     }
 
@@ -57,8 +60,8 @@ public class ColorController {
 
     // Cập nhật color
     @PutMapping(ApiConstants.Category.COLOR + ApiConstants.Category.UPDATE)
-    public ResponseEntity<ApiResponse<Integer>> update(@PathVariable("id") Integer id,
-                                                       @RequestBody ColorRequest colorRequest) {
+    public ResponseEntity<ApiResponse<Integer>> update(
+            @PathVariable("id") Integer id, @RequestBody ColorRequest colorRequest) {
         return ResponseHandler.success(colorService.update(id, colorRequest));
     }
 
@@ -67,5 +70,4 @@ public class ColorController {
     public ResponseEntity<ApiResponse<Integer>> delete(@PathVariable("id") Integer id) {
         return ResponseHandler.success(colorService.delete(id));
     }
-
 }

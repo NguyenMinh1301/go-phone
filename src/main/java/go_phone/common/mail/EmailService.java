@@ -1,13 +1,14 @@
 package go_phone.common.mail;
 
+import java.nio.charset.StandardCharsets;
+
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
-
-import java.nio.charset.StandardCharsets;
 
 @Service
 public class EmailService {
@@ -19,8 +20,7 @@ public class EmailService {
     public EmailService(
             JavaMailSender mailSender,
             @Value("${mail.from.email}") String fromEmail,
-            @Value("${mail.from.name}") String fromName
-    ) {
+            @Value("${mail.from.name}") String fromName) {
         this.mailSender = mailSender;
         this.fromEmail = fromEmail;
         this.fromName = fromName;
@@ -30,7 +30,10 @@ public class EmailService {
         try {
             MimeMessage message = mailSender.createMimeMessage();
             MimeMessageHelper helper =
-                    new MimeMessageHelper(message, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED, StandardCharsets.UTF_8.name());
+                    new MimeMessageHelper(
+                            message,
+                            MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED,
+                            StandardCharsets.UTF_8.name());
 
             helper.setFrom(new InternetAddress(fromEmail, fromName, StandardCharsets.UTF_8.name()));
             helper.setTo(toEmail);

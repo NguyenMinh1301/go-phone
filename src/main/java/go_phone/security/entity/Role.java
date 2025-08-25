@@ -1,11 +1,11 @@
 package go_phone.security.entity;
 
-import lombok.experimental.FieldDefaults;
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.AccessLevel;
+import lombok.experimental.FieldDefaults;
 
 @Getter
 @Setter
@@ -20,5 +20,4 @@ public class Role {
     Integer priority;
 
     Integer isActive;
-
 }

@@ -1,12 +1,13 @@
 package go_phone.common.util;
 
-import org.springframework.stereotype.Component;
 import java.security.SecureRandom;
+
+import org.springframework.stereotype.Component;
 
 @Component
 public class OrderNumberGenerator {
-    private static final long MIN = 1_000_000_000L;   // 10 chữ số, bắt đầu từ 1_000_000_000
-    private static final long MAX = 9_999_999_999L;   // PayOS giới hạn
+    private static final long MIN = 1_000_000_000L; // 10 chữ số, bắt đầu từ 1_000_000_000
+    private static final long MAX = 9_999_999_999L; // PayOS giới hạn
     private static final long RANGE = (MAX - MIN) + 1; // = 9_000_000_000
 
     private final SecureRandom rnd = new SecureRandom();

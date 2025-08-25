@@ -1,8 +1,9 @@
 package go_phone.common.response;
 
-import go_phone.common.exception.ErrorCode;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+
+import go_phone.common.exception.ErrorCode;
 
 public class ResponseHandler {
     private ResponseHandler() {}
@@ -16,18 +17,27 @@ public class ResponseHandler {
     }
 
     public static ResponseEntity<ApiResponse<Object>> error(ErrorCode errorCode) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponse<>(false, errorCode.getMessage(), errorCode.getCode(), null));
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(new ApiResponse<>(false, errorCode.getMessage(), errorCode.getCode(), null));
     }
 
-    public static ResponseEntity<ApiResponse<Object>> error(ErrorCode errorCode, HttpStatus status, String message) {
-        return ResponseEntity.status(status).body(new ApiResponse<>(false, errorCode.getMessage(), errorCode.getCode(), message));
+    public static ResponseEntity<ApiResponse<Object>> error(
+            ErrorCode errorCode, HttpStatus status, String message) {
+        return ResponseEntity.status(status)
+                .body(
+                        new ApiResponse<>(
+                                false, errorCode.getMessage(), errorCode.getCode(), message));
     }
 
-    public static ResponseEntity<ApiResponse<Object>> error(String customMessage, ErrorCode errorCode, HttpStatus status) {
-        return ResponseEntity.status(status).body(new ApiResponse<>(false, customMessage, errorCode.getCode(), null));
+    public static ResponseEntity<ApiResponse<Object>> error(
+            String customMessage, ErrorCode errorCode, HttpStatus status) {
+        return ResponseEntity.status(status)
+                .body(new ApiResponse<>(false, customMessage, errorCode.getCode(), null));
     }
 
-    public static ResponseEntity<ApiResponse<Object>> error(ErrorCode errorCode, HttpStatus status) {
-        return ResponseEntity.status(status).body(new ApiResponse<>(false, errorCode.getMessage(), null, null));
+    public static ResponseEntity<ApiResponse<Object>> error(
+            ErrorCode errorCode, HttpStatus status) {
+        return ResponseEntity.status(status)
+                .body(new ApiResponse<>(false, errorCode.getMessage(), null, null));
     }
 }

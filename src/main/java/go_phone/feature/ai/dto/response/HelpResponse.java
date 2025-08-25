@@ -7,6 +7,6 @@ public record HelpResponse(
         String email,
         SupportType type,
         String subject,
-        String message,   // nguyên văn message user đã gửi (đã normalize)
-        String reply      // câu trả lời từ AI
-) {}
+        String message, // nguyên văn message user đã gửi (đã normalize)
+        String reply // câu trả lời từ AI
+        ) {}
