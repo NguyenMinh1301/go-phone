@@ -28,9 +28,6 @@ public class LoginControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @Mock
-    private AuthService authService;
-
     private LoginRequest loginRequest;
     private TokenResponse tokenResponse;
 
@@ -58,8 +55,6 @@ public class LoginControllerTest {
         //GIVEN
         ObjectMapper objectMapper = new ObjectMapper();
         String content = objectMapper.writeValueAsString(loginRequest);
-
-        Mockito.when(authService.login(ArgumentMatchers.any())).thenReturn(tokenResponse);
 
         //WHEN, THEN
         mockMvc.perform(MockMvcRequestBuilders
