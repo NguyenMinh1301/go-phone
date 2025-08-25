@@ -14,7 +14,10 @@ public class OrderNumberGenerator {
 
     // Trả về mã đơn hàng 10 chữ số trong [1_000_000_000, 9_999_999_999]
     public long next10Digits() {
-        long v = Math.abs(rnd.nextLong()) % RANGE;
-        return MIN + v;
+        long randomValue = Math.floorMod(rnd.nextLong(), RANGE);
+
+        long result = MIN + randomValue;
+
+        return result;
     }
 }
