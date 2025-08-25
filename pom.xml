@@ -8,9 +8,9 @@
         <version>3.4.7</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.example</groupId>
-    <artifactId>go_phone</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <groupId>com.gophone</groupId>
+    <artifactId>gophone</artifactId>
+    <version>0.1</version>
     <name>go_phone</name>
     <description>go_phone</description>
     <url/>
