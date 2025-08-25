@@ -1,5 +1,10 @@
 package go_phone.security.controller;
 
+import jakarta.validation.Valid;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
 import go_phone.common.constants.ApiConstants;
 import go_phone.common.response.ApiResponse;
 import go_phone.common.response.ResponseHandler;
@@ -7,10 +12,7 @@ import go_phone.security.configuration.AuthService;
 import go_phone.security.configuration.PasswordResetService;
 import go_phone.security.dto.request.*;
 import go_phone.security.dto.response.TokenResponse;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(ApiConstants.Auth.BASE)
@@ -27,7 +29,9 @@ public class AuthController {
         if (rows > 0) {
             return ResponseHandler.success("Tạo user thành công", null);
         }
-        return ResponseHandler.error("Tạo user thất bại", go_phone.common.exception.ErrorCode.INTERNAL_ERROR,
+        return ResponseHandler.error(
+                "Tạo user thất bại",
+                go_phone.common.exception.ErrorCode.INTERNAL_ERROR,
                 org.springframework.http.HttpStatus.BAD_REQUEST);
     }
 
@@ -42,8 +46,7 @@ public class AuthController {
     @PostMapping(ApiConstants.Auth.LOGOUT)
     public ResponseEntity<ApiResponse<Object>> logout(
             @RequestHeader(value = "Authorization", required = false) String authorization,
-            @RequestBody(required = false) IntrospectRequest body
-    ) {
+            @RequestBody(required = false) IntrospectRequest body) {
         String token = extractToken(authorization, body);
         authService.logout(token);
         return ResponseHandler.success("Logout thành công", null);
@@ -53,8 +56,7 @@ public class AuthController {
     @PostMapping(ApiConstants.Auth.INTROSPECT)
     public ResponseEntity<ApiResponse<TokenResponse>> introspect(
             @RequestHeader(value = "Authorization", required = false) String authorization,
-            @RequestBody(required = false) IntrospectRequest req
-    ) {
+            @RequestBody(required = false) IntrospectRequest req) {
         String token = extractToken(authorization, req);
         TokenResponse tr = authService.introspect(token);
         return ResponseHandler.success("Token hợp lệ", tr);
@@ -62,14 +64,16 @@ public class AuthController {
 
     // Gửi OTP
     @PostMapping(ApiConstants.Auth.FORGOT_REQUEST)
-    public ResponseEntity<ApiResponse<Object>> forgotRequest(@Valid @RequestBody ForgotPasswordRequest req) {
+    public ResponseEntity<ApiResponse<Object>> forgotRequest(
+            @Valid @RequestBody ForgotPasswordRequest req) {
         passwordResetService.sendOtp(req.getEmail());
         return ResponseHandler.success("Nếu email tồn tại, OTP đã được gửi", null);
     }
 
     // Reset password
     @PostMapping(ApiConstants.Auth.FORGOT_RESET)
-    public ResponseEntity<ApiResponse<Object>> forgotReset(@Valid @RequestBody ResetPasswordRequest req) {
+    public ResponseEntity<ApiResponse<Object>> forgotReset(
+            @Valid @RequestBody ResetPasswordRequest req) {
         passwordResetService.resetPassword(req.getEmail(), req.getOtp(), req.getNewPassword());
         return ResponseHandler.success("Đổi mật khẩu thành công", null);
     }

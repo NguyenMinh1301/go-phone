@@ -1,5 +1,10 @@
 package go_phone.security.configuration;
 
+import java.util.List;
+
+import org.springframework.security.core.userdetails.*;
+import org.springframework.stereotype.Service;
+
 import go_phone.common.exception.AppException;
 import go_phone.common.exception.ErrorCode;
 import go_phone.security.entity.Role;
@@ -7,10 +12,6 @@ import go_phone.security.entity.User;
 import go_phone.security.mapper.RoleMapper;
 import go_phone.security.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.userdetails.*;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor

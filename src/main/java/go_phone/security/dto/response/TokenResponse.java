@@ -1,7 +1,9 @@
 package go_phone.security.dto.response;
+
+import java.time.Instant;
+
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import java.time.Instant;
 
 @Getter
 @Setter
@@ -12,9 +14,8 @@ import java.time.Instant;
 public class TokenResponse {
 
     String token;
-    Instant issuedAt;  // epoch seconds
+    Instant issuedAt; // epoch seconds
     Instant expiresAt; // epoch seconds
     String issuer;
     String username;
-
 }

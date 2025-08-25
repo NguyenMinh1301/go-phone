@@ -1,8 +1,8 @@
 package go_phone.common.response;
 
-import lombok.*;
-
 import java.util.List;
+
+import lombok.*;
 
 @Getter
 @Setter
@@ -18,5 +18,4 @@ public class PageResponse<T> {
     private long total;
 
     private List<T> data;
-
 }

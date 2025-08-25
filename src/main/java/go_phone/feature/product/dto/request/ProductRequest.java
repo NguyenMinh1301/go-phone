@@ -1,10 +1,10 @@
 package go_phone.feature.product.dto.request;
 
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 
 @Getter
@@ -55,5 +55,4 @@ public class ProductRequest {
     String updatedBy;
     Integer isActive;
     Integer isDeleted;
-
 }

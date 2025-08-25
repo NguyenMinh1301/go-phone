@@ -1,8 +1,7 @@
 package go_phone.common.constants;
 
 public class ApiConstants {
-    private ApiConstants() {
-    }
+    private ApiConstants() {}
 
     public static final String BASE_API = "/api";
     public static final String VERSION_V1 = BASE_API + "/v1";
@@ -16,8 +15,7 @@ public class ApiConstants {
         public static final String FORGOT_REQUEST = "/forgot/request";
         public static final String FORGOT_RESET = "/forgot/reset";
 
-        private Auth() {
-        }
+        private Auth() {}
     }
 
     public static final class Ai {
@@ -25,8 +23,8 @@ public class ApiConstants {
         public static final String CHAT = "/chat";
         public static final String CHAT_WITH_IMAGE = "/chat-with-image";
         public static final String HELP = "/help";
-        private Ai() {
-        }
+
+        private Ai() {}
     }
 
     public static final class Product {
@@ -39,8 +37,7 @@ public class ApiConstants {
         public static final String UPDATE = "/update/{id}";
         public static final String SOFT_DELETE = "/delete/{id}";
 
-        private Product() {
-        }
+        private Product() {}
     }
 
     public static final class Category {
@@ -56,14 +53,14 @@ public class ApiConstants {
         public static final String UPDATE = "/update/{id}";
         public static final String SOFT_DELETE = "/delete/{id}";
 
-        private Category() {
-        }
+        private Category() {}
     }
 
     public static final class Order {
         public static final String BASE = VERSION_V1 + "/orders";
         public static final String CREATE = "/create";
         public static final String GET_BY_CODE = "/get/{orderCode}";
+
         private Order() {}
     }
 
@@ -71,7 +68,7 @@ public class ApiConstants {
         public static final String BASE = VERSION_V1 + "/payments/payos";
         public static final String CREATE = "/create";
         public static final String WEBHOOK = "/webhooks/payos"; // or use app.payment.webhook-path
+
         private Payment() {}
     }
-
 }

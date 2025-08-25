@@ -1,10 +1,11 @@
 package go_phone.security.mapper;
 
-import go_phone.security.entity.Role;
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import java.util.List;
+import go_phone.security.entity.Role;
 
 @Mapper
 public interface RoleMapper {
@@ -16,5 +17,4 @@ public interface RoleMapper {
     int insertUserRole(@Param("userId") Integer userId, @Param("roleId") Integer roleId);
 
     int deleteUserRoles(@Param("userId") Integer userId);
-
 }

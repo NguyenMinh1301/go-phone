@@ -1,11 +1,11 @@
 package go_phone.feature.product.entity;
 
 import go_phone.common.model.BaseEntity;
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 
 @Getter
@@ -52,5 +52,4 @@ public class Product extends BaseEntity {
     String note;
 
     Integer isActive;
-
 }

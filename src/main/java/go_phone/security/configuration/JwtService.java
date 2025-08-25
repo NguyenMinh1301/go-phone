@@ -1,14 +1,15 @@
 package go_phone.security.configuration;
 
-import io.jsonwebtoken.*;
-import io.jsonwebtoken.security.Keys;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
-
 import java.time.Instant;
 import java.util.Date;
 import java.util.Optional;
 import javax.crypto.SecretKey;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+
+import io.jsonwebtoken.*;
+import io.jsonwebtoken.security.Keys;
 
 @Service
 public class JwtService {
@@ -18,10 +19,9 @@ public class JwtService {
     private final long expMinutes;
 
     public JwtService(
-            @Value("${jwt.secret}") String secret
-            , @Value("${jwt.issuer}") String issuer
-            , @Value("${jwt.access-exp-minutes}") long expMinutes
-    ) {
+            @Value("${jwt.secret}") String secret,
+            @Value("${jwt.issuer}") String issuer,
+            @Value("${jwt.access-exp-minutes}") long expMinutes) {
         this.key = Keys.hmacShaKeyFor(secret.getBytes());
         this.issuer = issuer;
         this.expMinutes = expMinutes;
@@ -36,9 +36,7 @@ public class JwtService {
                 .setSubject(username)
                 .setIssuedAt(Date.from(now))
                 .setExpiration(Date.from(exp))
-                .addClaims(java.util.Map.of(
-                        "username", username
-                ))
+                .addClaims(java.util.Map.of("username", username))
                 .signWith(key, SignatureAlgorithm.HS256)
                 .compact();
     }

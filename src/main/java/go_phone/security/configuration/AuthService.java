@@ -1,23 +1,23 @@
 package go_phone.security.configuration;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
+
+import org.springframework.security.authentication.*;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 
 import go_phone.common.exception.AppException;
 import go_phone.common.exception.ErrorCode;
 import go_phone.security.dto.request.LoginRequest;
 import go_phone.security.dto.request.RegisterRequest;
 import go_phone.security.dto.response.TokenResponse;
+import go_phone.security.entity.User;
 import go_phone.security.mapper.RevokedTokenMapper;
 import go_phone.security.mapper.RoleMapper;
 import go_phone.security.mapper.UserMapper;
-import go_phone.security.entity.User;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.authentication.*;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
-
-import java.time.Instant;
-import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
@@ -39,17 +39,18 @@ public class AuthService {
             throw new AppException(ErrorCode.EMAIL_ALREADY_EXIST);
         }
 
-        User user = User.builder()
-                .username(req.getUsername())
-                .email(req.getEmail())
-                .password(encoder.encode(req.getPassword()))
-                .fullName(req.getFullName())
-                .phone(req.getPhone())
-                .address(req.getAddress())
-                .createdBy(req.getCreatedBy() != null ? req.getCreatedBy() : "system")
-                .isActive(req.getIsActive() != null ? req.getIsActive() : 1)
-                .isDeleted(req.getIsDeleted() != null ? req.getIsDeleted() : 0)
-                .build();
+        User user =
+                User.builder()
+                        .username(req.getUsername())
+                        .email(req.getEmail())
+                        .password(encoder.encode(req.getPassword()))
+                        .fullName(req.getFullName())
+                        .phone(req.getPhone())
+                        .address(req.getAddress())
+                        .createdBy(req.getCreatedBy() != null ? req.getCreatedBy() : "system")
+                        .isActive(req.getIsActive() != null ? req.getIsActive() : 1)
+                        .isDeleted(req.getIsDeleted() != null ? req.getIsDeleted() : 0)
+                        .build();
 
         int rows = userMapper.insert(user);
 
@@ -69,9 +70,10 @@ public class AuthService {
     }
 
     public TokenResponse login(LoginRequest req) {
-        Authentication auth = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(req.getUsername(), req.getPassword())
-        );
+        Authentication auth =
+                authenticationManager.authenticate(
+                        new UsernamePasswordAuthenticationToken(
+                                req.getUsername(), req.getPassword()));
         // nếu sai sẽ ném AuthenticationException và GlobalExceptionHandler đã map BAD_CREDENTIALS
 
         String token = jwtService.generateToken(req.getUsername());
@@ -98,11 +100,12 @@ public class AuthService {
             return;
         }
 
-        LocalDateTime exp = LocalDateTime.ofInstant(jwtService.getExpiration(token), java.time.ZoneId.systemDefault());
+        LocalDateTime exp =
+                LocalDateTime.ofInstant(
+                        jwtService.getExpiration(token), java.time.ZoneId.systemDefault());
         revokedTokenMapper.insert(token, exp);
         // dọn rác token quá hạn
         revokedTokenMapper.deleteExpired();
-
     }
 
     public TokenResponse introspect(String token) {
@@ -115,7 +118,10 @@ public class AuthService {
             throw new AppException(ErrorCode.INVALID_TOKEN);
         }
 
-        String username = jwtService.extractUsername(token).orElseThrow(() -> new AppException(ErrorCode.UNAUTHORIZED));
+        String username =
+                jwtService
+                        .extractUsername(token)
+                        .orElseThrow(() -> new AppException(ErrorCode.UNAUTHORIZED));
 
         return TokenResponse.builder()
                 .token(token)
@@ -125,5 +131,4 @@ public class AuthService {
                 .username(username)
                 .build();
     }
-
 }

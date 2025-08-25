@@ -8,7 +8,5 @@ public class CalculateOffset {
         // int offset = (page - 1) * size;
 
         return (page - 1) * size;
-
     }
-
 }
