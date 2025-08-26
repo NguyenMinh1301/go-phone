@@ -18,5 +18,4 @@ public class HashingUtils {
             return null;
         }
     }
-
 }

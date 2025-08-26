@@ -1,11 +1,11 @@
 package go_phone.feature.order.dto.response;
 
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.Builder;
-import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 
 @Getter
@@ -21,5 +21,4 @@ public class OrderResponse {
     String status;
     Long grandTotal;
     String currency;
-
 }

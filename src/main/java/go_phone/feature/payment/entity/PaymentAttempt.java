@@ -1,12 +1,12 @@
 package go_phone.feature.payment.entity;
 
 import go_phone.common.model.BaseEntity;
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.Builder;
-import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 
 @Getter
@@ -19,13 +19,12 @@ public class PaymentAttempt extends BaseEntity {
 
     Long attemptId;
     Long orderId;
-    String gateway;               // PAYOS
-    String gatewayPaymentId;      // paymentLinkId
+    String gateway; // PAYOS
+    String gatewayPaymentId; // paymentLinkId
     String checkoutUrl;
-    String status;                // INITIATED / PENDING / SUCCEEDED / FAILED / CANCELLED
+    String status; // INITIATED / PENDING / SUCCEEDED / FAILED / CANCELLED
     Long amount;
-    String currency;              // VND
+    String currency; // VND
     String idempotencyKey;
-    String rawPayload;            // LONGTEXT JSON
-
+    String rawPayload; // LONGTEXT JSON
 }

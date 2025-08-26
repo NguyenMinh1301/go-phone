@@ -1,9 +1,10 @@
 package go_phone.security.mapper;
 
-import go_phone.common.mapper.BaseMapper;
-import go_phone.security.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+
+import go_phone.common.mapper.BaseMapper;
+import go_phone.security.entity.User;
 
 @Mapper
 public interface UserMapper extends BaseMapper<User> {
@@ -17,5 +18,4 @@ public interface UserMapper extends BaseMapper<User> {
     int existsByEmail(@Param("email") String email);
 
     int updatePasswordById(@Param("userId") Integer userId, @Param("password") String hashed);
-
 }

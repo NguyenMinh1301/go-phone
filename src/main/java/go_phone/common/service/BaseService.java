@@ -1,13 +1,13 @@
 package go_phone.common.service;
 
-import go_phone.common.response.PageResponse;
-
 import java.util.List;
 
+import go_phone.common.response.PageResponse;
+
 /**
- * @param <REQ>  Request DTO (create/update)
- * @param <RES>  Response DTO
- * @param <I>    Id
+ * @param <REQ> Request DTO (create/update)
+ * @param <RES> Response DTO
+ * @param <I> Id
  */
 public interface BaseService<REQ, RES, I> {
 
@@ -24,5 +24,4 @@ public interface BaseService<REQ, RES, I> {
     PageResponse<RES> searchPageable(String keyword, int page, int size);
 
     int delete(I id);
-
 }

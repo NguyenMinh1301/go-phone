@@ -1,5 +1,10 @@
 package go_phone.feature.order.controller;
 
+import jakarta.validation.Valid;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
 import go_phone.common.constants.ApiConstants;
 import go_phone.common.response.ApiResponse;
 import go_phone.common.response.ResponseHandler;
@@ -8,10 +13,6 @@ import go_phone.feature.order.dto.response.OrderResponse;
 import go_phone.feature.order.entity.Order;
 import go_phone.feature.order.service.OrderService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping(ApiConstants.Order.BASE)
@@ -21,7 +22,8 @@ public class OrderController {
     private final OrderService orderService;
 
     @PostMapping(ApiConstants.Order.CREATE)
-    public ResponseEntity<ApiResponse<OrderResponse>> create(@RequestBody @Valid OrderCreateRequest req) {
+    public ResponseEntity<ApiResponse<OrderResponse>> create(
+            @RequestBody @Valid OrderCreateRequest req) {
         return ResponseHandler.success(orderService.create(req));
     }
 

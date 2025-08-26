@@ -1,5 +1,9 @@
 package go_phone.feature.category.service.Impl;
 
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
 import go_phone.common.exception.AppException;
 import go_phone.common.exception.ErrorCode;
 import go_phone.common.handler.CalculateOffset;
@@ -11,9 +15,6 @@ import go_phone.feature.category.entity.Brand;
 import go_phone.feature.category.mapper.BrandMapper;
 import go_phone.feature.category.service.BrandService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -90,5 +91,4 @@ public class BrandServiceImpl implements BrandService {
         brandMapper.softDeleteById(id);
         return brandMapper.softDeleteById(id);
     }
-
 }

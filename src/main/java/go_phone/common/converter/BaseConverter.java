@@ -1,14 +1,15 @@
 package go_phone.common.converter;
 
-import go_phone.common.response.PageResponse;
-import org.mapstruct.MappingTarget;
-
 import java.util.List;
 
+import org.mapstruct.MappingTarget;
+
+import go_phone.common.response.PageResponse;
+
 /**
- * @param <REQ>  Request DTO (create/update)
- * @param <RES>  Response DTO
- * @param <E>    Entity
+ * @param <REQ> Request DTO (create/update)
+ * @param <RES> Response DTO
+ * @param <E> Entity
  */
 public interface BaseConverter<REQ, RES, E> {
 
@@ -37,6 +38,4 @@ public interface BaseConverter<REQ, RES, E> {
                 .data(data)
                 .build();
     }
-
-
 }

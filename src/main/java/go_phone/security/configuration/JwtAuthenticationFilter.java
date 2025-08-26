@@ -1,18 +1,20 @@
 package go_phone.security.configuration;
 
-import go_phone.common.exception.ErrorCode;
-import go_phone.common.response.ResponseWriter;
-import go_phone.security.mapper.RevokedTokenMapper;
+import java.io.IOException;
+
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
-import lombok.AllArgsConstructor;
+
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.*;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import java.io.IOException;
+import go_phone.common.exception.ErrorCode;
+import go_phone.common.response.ResponseWriter;
+import go_phone.security.mapper.RevokedTokenMapper;
+import lombok.AllArgsConstructor;
 
 @Component
 @AllArgsConstructor
@@ -22,7 +24,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private final RevokedTokenMapper revokedTokenMapper;
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+    protected void doFilterInternal(
+            HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
 
         final String authHeader = request.getHeader("Authorization");
@@ -35,7 +38,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         token = authHeader.substring(7);
 
         if (!jwtService.isValid(token) || revokedTokenMapper.isRevoked(token) > 0) {
-            ResponseWriter.writeJsonError(response, ErrorCode.INVALID_TOKEN, HttpServletResponse.SC_UNAUTHORIZED, true);
+            ResponseWriter.writeJsonError(
+                    response, ErrorCode.INVALID_TOKEN, HttpServletResponse.SC_UNAUTHORIZED, true);
             return;
         }
 
@@ -53,6 +57,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) {
         String path = request.getRequestURI();
-        return path.startsWith("/api/v1/auth"); // cho phép qua để login/register/introspect/logout xử lý riêng
+        return path.startsWith(
+                "/api/v1/auth"); // cho phép qua để login/register/introspect/logout xử lý riêng
     }
 }

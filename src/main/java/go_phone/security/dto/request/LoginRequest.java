@@ -1,6 +1,7 @@
 package go_phone.security.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
+
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -13,10 +14,7 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class LoginRequest {
 
-    @NotBlank
-    String username;
+    @NotBlank String username;
 
-    @NotBlank
-    String password;
-
+    @NotBlank String password;
 }

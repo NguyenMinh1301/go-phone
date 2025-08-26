@@ -11,5 +11,4 @@ public interface OrderService {
     Order findByOrderCode(Long orderCode);
 
     String toJson(Object any);
-
 }
