@@ -1,0 +1,62 @@
+name: go_phone_stack
+
+services:
+  mysql:
+    image: mysql:8.4
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: go_phone_master_db
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    healthcheck:
+      test: [ "CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -uroot -proot --silent" ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    networks: [ go_phone_net ]
+
+  redis:
+    image: redis:7-alpine
+    container_name: redis
+    ports:
+      - "6379:6379"
+    networks: [go_phone_net]
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: app
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    env_file:
+      - .env
+    environment:
+      MYSQL_URL: jdbc:mysql://mysql:3306/go_phone_master_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Ho_Chi_Minh
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/go_phone_master_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Ho_Chi_Minh
+
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+
+      SPRING_REDIS_HOST: redis
+      SPRING_REDIS_PORT: 6379
+
+      SPRING_PROFILE: dev
+      JAVA_OPTS: "-Xms256m -Xmx512m"
+    ports:
+      - "8888:8888"
+    networks: [go_phone_net]
+
+volumes:
+  mysql_data:
+
+networks:
+  go_phone_net:
+    name: go_phone_net

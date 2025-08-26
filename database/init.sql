@@ -143,6 +143,13 @@ CREATE TABLE `role` (
   `s_active`   TINYINT(1) DEFAULT 1
 );
 
+INSERT INTO `role` (`role_code`, `role_name`, `priority`) VALUES
+('GO_STARTER','Go-Starter',1),
+('GO_USER','Go-User',2),
+('GO_PLUS','Go-Plus',3),
+('GO_PRO','Go-Pro',4),
+('GO_ELITE','Go-Elite',5);
+
   -- Create table user_role
 CREATE TABLE `user_role` (
     `user_id` INT,
