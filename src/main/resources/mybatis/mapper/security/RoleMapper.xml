@@ -12,14 +12,24 @@
     </resultMap>
 
     <select id="findByUserId" parameterType="int" resultMap="RoleResult">
-        SELECT r.*
+        SELECT
+        r.role_id
+        , r.role_code
+        , r.role_name
+        , r.priority
+        , r.is_active
         FROM role r
         JOIN user_role ur ON ur.role_id = r.role_id
         WHERE ur.user_id = #{userId}
     </select>
 
     <select id="findByCode" parameterType="string" resultMap="RoleResult">
-        SELECT *
+        SELECT
+        r.role_id
+        , r.role_code
+        , r.role_name
+        , r.priority
+        , r.is_active
         FROM role
         WHERE role_code = #{roleCode}
         LIMIT 1
