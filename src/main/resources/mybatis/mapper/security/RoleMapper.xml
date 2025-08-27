@@ -4,10 +4,10 @@
 <mapper namespace="go_phone.security.mapper.RoleMapper">
 
     <resultMap id="RoleResult" type="go_phone.security.entity.Role">
-        <id     column="role_id"   property="roleId"/>
-        <result column="role_code" property="roleCode"/>
-        <result column="role_name" property="roleName"/>
-        <result column="priority"  property="priority"/>
+        <id     column="role_id"    property="roleId"/>
+        <result column="role_code"  property="roleCode"/>
+        <result column="role_name"  property="roleName"/>
+        <result column="priority"   property="priority"/>
         <result column="is_active"  property="sActive"/>
     </resultMap>
 
@@ -26,11 +26,16 @@
     </select>
 
     <insert id="insertUserRole">
-        INSERT INTO user_role(user_id, role_id) VALUES(#{userId}, #{roleId})
+        INSERT INTO user_role(user_id, role_id)
+        VALUES (
+        #{userId}
+        , #{roleId}
+        )
     </insert>
 
     <delete id="deleteUserRoles" parameterType="int">
-        DELETE FROM user_role WHERE user_id = #{userId}
+        DELETE FROM user_role
+        WHERE user_id = #{userId}
     </delete>
 
 </mapper>

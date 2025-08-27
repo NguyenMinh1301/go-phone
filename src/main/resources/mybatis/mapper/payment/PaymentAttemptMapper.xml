@@ -3,18 +3,18 @@
 <mapper namespace="go_phone.feature.payment.mapper.PaymentAttemptMapper">
 
     <resultMap id="AttemptMap" type="go_phone.feature.payment.entity.PaymentAttempt">
-        <id column="attempt_id" property="attemptId"/>
-        <result column="order_id" property="orderId"/>
-        <result column="gateway" property="gateway"/>
-        <result column="gateway_payment_id" property="gatewayPaymentId"/>
-        <result column="checkout_url" property="checkoutUrl"/>
-        <result column="status" property="status"/>
-        <result column="amount" property="amount"/>
-        <result column="currency" property="currency"/>
-        <result column="idempotency_key" property="idempotencyKey"/>
-        <result column="raw_payload" property="rawPayload"/>
-        <result column="created_at" property="createdAt"/>
-        <result column="updated_at" property="updatedAt"/>
+        <id column="attempt_id"                 property="attemptId"/>
+        <result column="order_id"               property="orderId"/>
+        <result column="gateway"                property="gateway"/>
+        <result column="gateway_payment_id"     property="gatewayPaymentId"/>
+        <result column="checkout_url"           property="checkoutUrl"/>
+        <result column="status"                 property="status"/>
+        <result column="amount"                 property="amount"/>
+        <result column="currency"               property="currency"/>
+        <result column="idempotency_key"        property="idempotencyKey"/>
+        <result column="raw_payload"            property="rawPayload"/>
+        <result column="created_at"             property="createdAt"/>
+        <result column="updated_at"             property="updatedAt"/>
     </resultMap>
 
     <insert id="insert" parameterType="go_phone.feature.payment.entity.PaymentAttempt" useGeneratedKeys="true" keyProperty="attemptId">

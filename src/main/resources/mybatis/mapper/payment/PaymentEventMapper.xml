@@ -8,7 +8,7 @@
         , payload_hash
         , type
         , received_at
-        ) VALUES(
+        ) VALUES (
         #{gatewayPaymentId}
         , #{payloadHash}
         , #{type}
