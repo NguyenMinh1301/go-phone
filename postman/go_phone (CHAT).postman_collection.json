@@ -1,0 +1,110 @@
+{
+	"info": {
+		"_postman_id": "9e06c948-58c1-4419-a455-01e09cf548d8",
+		"name": "go_phone (CHAT)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "44267440"
+	},
+	"item": [
+		{
+			"name": "CHAT",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"message\": \"Find 5 best phone\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8888/api/v1/ai/chat",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"api",
+						"v1",
+						"ai",
+						"chat"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CHAT WITH FILE",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": []
+						},
+						{
+							"key": "message",
+							"value": "Phân tích bức ảnh",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8888/api/v1/ai/chat/chat-with-image",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"api",
+						"v1",
+						"ai",
+						"chat",
+						"chat-with-image"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "HELP",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"minhng\",\r\n  \"type\": \"TECHNICAL\",\r\n  \"subject\": \"Không thanh toán được\",\r\n  \"message\": \"Khi thanh toán bằng PayOS thì bị lỗi 500 sau bước chọn thẻ.\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8888/api/v1/ai/help",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"api",
+						"v1",
+						"ai",
+						"help"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

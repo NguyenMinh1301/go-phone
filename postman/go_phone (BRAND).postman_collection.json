@@ -1,0 +1,262 @@
+{
+	"info": {
+		"_postman_id": "5efe171b-bedc-4b8d-9b83-3301a8420836",
+		"name": "go_phone (BRAND)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "44267440"
+	},
+	"item": [
+		{
+			"name": "BRAND GET",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnb19waG9uZSIsInN1YiI6Im1pbmgiLCJpYXQiOjE3NTU1OTIzNTMsImV4cCI6MTc1NTU5OTU1MywidXNlcm5hbWUiOiJtaW5oIn0.2CufT1SorglRdPJH_jrfMg6RihaCYEiSzWiTsW6-2FY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8888/api/v1/category/brand/get",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"api",
+						"v1",
+						"category",
+						"brand",
+						"get"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "BRAND GET PAGE",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnb19waG9uZSIsInN1YiI6Im1pbmgiLCJpYXQiOjE3NTU1OTIzNTMsImV4cCI6MTc1NTU5OTU1MywidXNlcm5hbWUiOiJtaW5oIn0.2CufT1SorglRdPJH_jrfMg6RihaCYEiSzWiTsW6-2FY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8888/api/v1/category/brand/page?page=1&size=10",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"api",
+						"v1",
+						"category",
+						"brand",
+						"page"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "size",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "BRAND SEARCH PAGE",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtaW5oIiwiaWF0IjoxNzU1NDMyMTUwLCJleHAiOjE3NTY2NDE3NTB9.jMB5XK27ANP71PetNWLTIOn-BmvaldwqkeybZhZ_cfk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/api/v1/category/brand/search?keyword=Nokia&page=1&size=10",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"api",
+						"v1",
+						"category",
+						"brand",
+						"search"
+					],
+					"query": [
+						{
+							"key": "keyword",
+							"value": "Nokia"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "size",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "BRAND GET BY ID",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnb19waG9uZSIsInN1YiI6Im1pbmgiLCJpYXQiOjE3NTU1NDMzOTAsImV4cCI6MTc1NTU1MDU5MCwidXNlcm5hbWUiOiJtaW5oIn0.nXNtRwLa7RMWd5VvhUmKND0YdrFVmHUJKY2zJ2cPv9k",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8888/api/v1/category/brand/get/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"api",
+						"v1",
+						"category",
+						"brand",
+						"get",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "BRAND ADD",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Nokia\",\r\n  \"description\": \"Thương hiệu điện thoại di động nổi tiếng từ Phần Lan\",\r\n  \"createdBy\": \"admin\",\r\n  \"isActive\": 1,\r\n  \"isDeleted\": 0\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8888/api/v1/category/brand/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"api",
+						"v1",
+						"category",
+						"brand",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "BRAND DELETE",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8888/api/v1/category/brand/delete/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"api",
+						"v1",
+						"category",
+						"brand",
+						"delete",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "BRAND UPDATE",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Nokiaa\",\r\n  \"description\": \"Thương hiệu điện thoại di động nổi tiếng từ Phần Lan\",\r\n  \"createdBy\": \"admin\",\r\n  \"isActive\": 1,\r\n  \"isDeleted\": 0\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8888/api/v1/category/brand/update/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"api",
+						"v1",
+						"category",
+						"brand",
+						"update",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,216 @@
+{
+	"info": {
+		"_postman_id": "bb8728ec-9d6b-43e9-8341-9ca1b4e9a311",
+		"name": "go_phone (MADE FROM)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "44267440"
+	},
+	"item": [
+		{
+			"name": "MADE FROM GET",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/api/v1/category/made-from/get",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"api",
+						"v1",
+						"category",
+						"made-from",
+						"get"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MADE FROM GET PAGE",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/api/v1/category/made-from/page?page=1&size=10",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"api",
+						"v1",
+						"category",
+						"made-from",
+						"page"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "size",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MADE FROM SEARCH PAGE",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/api/v1/category/made-from/search?keyword=Mỹ&page=1&size=10",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"api",
+						"v1",
+						"category",
+						"made-from",
+						"search"
+					],
+					"query": [
+						{
+							"key": "keyword",
+							"value": "Mỹ"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "size",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MADE FROM GET BY ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/api/v1/category/made-from/get/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"api",
+						"v1",
+						"category",
+						"made-from",
+						"get",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MADE FROM ADD",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"countryName\": \"Nhật Bản\",\r\n  \"description\": \"Sản xuất hoặc lắp ráp tại Nhật Bản\",\r\n  \"createdBy\": \"admin\",\r\n  \"isActive\": 1,\r\n  \"isDeleted\": 0\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8888/api/v1/category/made-from/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"api",
+						"v1",
+						"category",
+						"made-from",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MADE FROM DELETE",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/api/v1/category/made-from/delete/5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"api",
+						"v1",
+						"category",
+						"made-from",
+						"delete",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MADE FROM UPDATE",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"countryName\": \"Nhật Bản\",\r\n  \"description\": \"Sản xuất hoặc lắp ráp tại Nhật Bản\",\r\n  \"createdBy\": \"admin\",\r\n  \"isActive\": 1,\r\n  \"isDeleted\": 0\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8888/api/v1/category/made-from/update/5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"api",
+						"v1",
+						"category",
+						"made-from",
+						"update",
+						"5"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

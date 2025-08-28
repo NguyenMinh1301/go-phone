@@ -1,0 +1,84 @@
+{
+	"info": {
+		"_postman_id": "8c7769a6-5176-48ba-b7de-a3c2de0ece46",
+		"name": "go_phone (ORDER)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "44267440"
+	},
+	"item": [
+		{
+			"name": "CREATE",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnb19waG9uZSIsInN1YiI6Im1pbmgyIiwiaWF0IjoxNzU1NjgxNDUyLCJleHAiOjE3NTU2ODg2NTIsInVzZXJuYW1lIjoibWluaDIifQ.w1_HHtWPNjp9XpiKQ8vRV05WP4RxFgnkFiENTONitQA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"userId\": 1,\r\n  \"customerName\": \"Nguyen Quang Minh\",\r\n  \"customerPhone\": \"0900000000\",\r\n  \"customerEmail\": \"minh@example.com\",\r\n  \"shippingAddress\": \"Thu Duc, HCM\",\r\n  \"amount\": 10000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8888/api/v1/orders/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"api",
+						"v1",
+						"orders",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CHECK",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnb19waG9uZSIsInN1YiI6Im1pbmgyIiwiaWF0IjoxNzU1NjMxMDkxLCJleHAiOjE3NTU2MzgyOTEsInVzZXJuYW1lIjoibWluaDIifQ.g8sGgN3Huvpw_mVyRajNqOwrmHFDU2AaodZKg1RFic4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/api/v1/orders/get/7702907192",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"api",
+						"v1",
+						"orders",
+						"get",
+						"7702907192"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

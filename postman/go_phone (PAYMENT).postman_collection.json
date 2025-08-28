@@ -1,0 +1,49 @@
+{
+	"info": {
+		"_postman_id": "794cc3ab-5280-4400-b102-530d4b184223",
+		"name": "go_phone (PAYMENT)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "44267440"
+	},
+	"item": [
+		{
+			"name": "CREATE",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnb19waG9uZSIsInN1YiI6Im1pbmgyIiwiaWF0IjoxNzU1NjMxMDkxLCJleHAiOjE3NTU2MzgyOTEsInVzZXJuYW1lIjoibWluaDIifQ.g8sGgN3Huvpw_mVyRajNqOwrmHFDU2AaodZKg1RFic4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/api/v1/payments/payos/create?orderCode=7702907192",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"api",
+						"v1",
+						"payments",
+						"payos",
+						"create"
+					],
+					"query": [
+						{
+							"key": "orderCode",
+							"value": "7702907192"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
