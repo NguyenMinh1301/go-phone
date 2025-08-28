@@ -16,7 +16,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"username\": \"minh2\",\r\n  \"email\": \"minhgalaxy1000@gmail.com\",\r\n  \"password\": \"123456\",\r\n  \"fullName\": \"Nguyen Quang Minh\",\r\n  \"phone\": \"0987654321\",\r\n  \"address\": \"Viet Nam\"\r\n}",
+					"raw": "{\r\n  \"username\": \"minh2\",\r\n  \"email\": \"nguyenminh1301.dev@gmail.com\",\r\n  \"password\": \"123456\",\r\n  \"fullName\": \"Nguyen Quang Minh\",\r\n  \"phone\": \"0987654321\",\r\n  \"address\": \"Viet Nam\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -140,7 +140,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{ \r\n    \"email\": \"minhgalaxy1000@gmail.com\" \r\n}",
+					"raw": "{ \r\n    \"email\": \"nguyenminh1301.dev@gmail.com\" \r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
