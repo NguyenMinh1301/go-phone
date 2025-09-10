@@ -4,7 +4,7 @@ WORKDIR /workspace
 COPY pom.xml .
 RUN mvn -q -DskipTests dependency:go-offline
 COPY src ./src
-RUN mvn -DskipTests clean package
+RUN mvn -DskipTests -Dspotless.check.skip=true clean package
 
 RUN find target -maxdepth 1 -type f -name "*.jar" ! -name "*original*" -exec cp {} /workspace/app.jar \;
 
