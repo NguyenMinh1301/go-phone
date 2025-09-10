@@ -1,7 +1,5 @@
 # Go‑Phone — Backend Thương mại điện tử (Spring Boot/MyBatis)
 
-**Languages:** [🇻🇳 Vietnamese](document/VI/README-vi.md) | [🇬🇧 English](document/EN/README-en.md)
-
 <p align="center">
   <a href="./">
     <img src="logo/GO.svg" alt="Go-Phone Logo" width="160">
