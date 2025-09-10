@@ -35,8 +35,6 @@ Dự án Go‑Phone hiện thực hoá các nghiệp vụ cốt lõi của một
 * **Chất lượng mã**: **SonarQube** (local/server)
 * **Đóng gói & hạ tầng**: Maven, Docker/Docker Compose
 
----
-
 ## Cấu trúc thư mục
 
 Cấu trúc tổng quan (rút gọn):
@@ -62,8 +60,6 @@ go_phone/
      ├─ Hướng dẫn setup Docker.docx/             # Hướng dẫn Docker/Compose
      └─ Hướng dẫn setup PayOS.docx/              # Hướng dẫn tích hợp PayOS
 ```
-
----
 
 ## Chuẩn hoá API & xử lý lỗi
 
@@ -186,8 +182,6 @@ Chạy trực tiếp qua Maven:
 mvn spring-boot:run -Dspring-boot.run.profiles=dev
 ```
 
----
-
 ## Kiểm thử & chất lượng mã
 
 * **JaCoCo**: thu thập và hiển thị độ phủ kiểm thử
@@ -217,7 +211,7 @@ mvn spring-boot:run -Dspring-boot.run.profiles=dev
 * JWT secret và các credential phải quản lý qua biến môi trường/secret manager.
 * Ràng buộc quyền truy cập endpoint nhạy cảm ở lớp Security.
 
-## Phụ lục: cURL mẫu
+## CURL mẫu
 
 Đăng nhập:
 
