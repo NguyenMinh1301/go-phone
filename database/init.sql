@@ -109,17 +109,17 @@ CREATE TABLE `role` (
   `role_name` VARCHAR(100) NOT NULL,
   `priority` INT NOT NULL,
   -- thứ bậc (1..5)
-  `s_active` TINYINT(1) DEFAULT 1
+  `is_active` TINYINT(1) DEFAULT 1
 );
 INSERT INTO `role` (
-  `role_code`, `role_name`, `priority`
+  `role_code`, `role_name`, `priority`, `is_active`
 )
 VALUES
-  ('GO_STARTER', 'Go-Starter', 1),
-  ('GO_USER', 'Go-User', 2),
-  ('GO_PLUS', 'Go-Plus', 3),
-  ('GO_PRO', 'Go-Pro', 4),
-  ('GO_ELITE', 'Go-Elite', 5);
+  ('GO_STARTER', 'Go-Starter', 1, 1),
+  ('GO_USER', 'Go-User', 2, 1),
+  ('GO_PLUS', 'Go-Plus', 3, 1),
+  ('GO_PRO', 'Go-Pro', 4, 1),
+  ('GO_ELITE', 'Go-Elite', 5, 1);
 -- Create table user_role
 CREATE TABLE `user_role` (
   `user_id` INT,

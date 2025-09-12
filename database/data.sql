@@ -68,20 +68,3 @@ INSERT INTO `product` (
  '12GB', '128GB', 'Android 13',
  '162.9 x 76.6 x 8.9 mm', '212g', 'Kính Gorilla Glass Victus', 'Nhôm', 'Wi-Fi 6E', 'Bluetooth 5.2',
  'Hỗ trợ AI xử lý ảnh nâng cao', 'admin', 1, 0);
-
-INSERT INTO `role` (`role_code`, `role_name`, `priority`) VALUES
-('GO_STARTER','Go-Starter',1),
-('GO_USER','Go-User',2),
-('GO_PLUS','Go-Plus',3),
-('GO_PRO','Go-Pro',4),
-('GO_ELITE','Go-Elite',5);
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
